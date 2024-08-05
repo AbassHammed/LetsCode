@@ -1,4 +1,6 @@
 import React from 'react';
 
-const SessionPage = () => <div>Have a good coding</div>;
+import { Session } from '@/components/pages';
+
+const SessionPage = () => <Session />;
 export default SessionPage;
