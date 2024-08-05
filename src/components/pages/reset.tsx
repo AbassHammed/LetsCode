@@ -171,7 +171,6 @@ const ResetPassword = () => {
               <Button
                 type="submit"
                 className="text-white font-medium bg-brand-purple hover:bg-brand-purple-s">
-                {/* {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} */}
                 Submit
               </Button>
             </form>
