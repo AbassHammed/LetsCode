@@ -23,7 +23,8 @@
       "@utils": ["./src/lib/utils"],
       "@hooks": ["./src/hooks"],
       "@types": ["./src/types"],
-      "@config/*": ["./src/config/*"]
+      "@config/*": ["./src/config/*"],
+      "@firebase/*": ["./src/firbase/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
