@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 export type TernaryDarkMode = 'system' | 'dark' | 'light';
 
 export type TernaryDarkModeOptions = {
@@ -48,4 +50,9 @@ export type SignupInputs = {
 export type LoginInputs = {
   email: string;
   password: string;
+};
+
+export type UseAuthReturnType = {
+  user: ReturnType<typeof useAuthState>[0];
+  loading: ReturnType<typeof useAuthState>[1];
 };

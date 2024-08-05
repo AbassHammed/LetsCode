@@ -27,6 +27,18 @@ export {
   FormMessage,
   FormField,
 } from './shared/form';
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from './shared/dialog';
 export { Switch } from './shared/switch';
 export { default as Loading } from './shared/loading';
 export { default as Provider } from './provider';

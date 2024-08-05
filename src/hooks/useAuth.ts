@@ -3,12 +3,8 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { auth } from '@/firebase/firebase';
+import { UseAuthReturnType } from '@types';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
-type UseAuthReturnType = {
-  user: ReturnType<typeof useAuthState>[0];
-  loading: ReturnType<typeof useAuthState>[1];
-};
 
 export const useAuth = (): UseAuthReturnType => {
   const [user, loading] = useAuthState(auth);
