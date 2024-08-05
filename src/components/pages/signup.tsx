@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -25,6 +26,8 @@ import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import IconImage from '../../../public/Icon.png';
 
 const passwordSchema = z
   .string()
@@ -103,9 +106,24 @@ const SignUpForm = () => {
   };
 
   return (
-    <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4">
+    <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4 relative">
       <div className="w-full space-y-6 text-gray-400 sm:max-w-md">
         <div className="text-center">
+          <div className="flex flex-col items-center">
+            <Image
+              src={IconImage}
+              alt="LetsCode Logo"
+              width={100}
+              height={100}
+              quality={95}
+              priority
+              style={{
+                width: 'auto',
+                height: 'auto',
+              }}
+            />
+            <h1 className="fonth1 ml-2">LetsCode</h1>
+          </div>
           <div className="mt-5 space-y-2">
             <h3 className="text-white text-2xl font-bold sm:text-3xl">Create an account</h3>
             <p className="">
@@ -120,7 +138,7 @@ const SignUpForm = () => {
         </div>
         <div className="bg-neutral-800 shadow p-4 py-6 sm:p-6 sm:rounded-lg">
           <Form {...form}>
-            <form className="space-y-8 text-[#f5f5f5]" onSubmit={form.handleSubmit(handleSignUp)}>
+            <form className="space-y-4 text-[#f5f5f5]" onSubmit={form.handleSubmit(handleSignUp)}>
               <FormField
                 control={form.control}
                 name="fullName"

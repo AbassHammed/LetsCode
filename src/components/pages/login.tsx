@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -24,6 +25,8 @@ import { LoginInputs } from '@types';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import IconImage from '../../../public/Icon.png';
 
 const passwordSchema = z
   .string()
@@ -53,7 +56,7 @@ export default function Login() {
   const { toast } = useToast();
   const router = useRouter();
   const [isPasswordHidden, setPasswordHidden] = useState(true);
-  const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, , loading, error] = useSignInWithEmailAndPassword(auth);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -76,11 +79,17 @@ export default function Login() {
       const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password);
       if (newUser) {
         router.push('/session');
+      } else if (error) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid credentials',
+          description: error.message,
+        });
       }
     } catch (err: any) {
       toast({
         variant: 'destructive',
-        title: 'Invalid credentials',
+        title: 'Connection Error',
         description: err.message,
       });
     }
@@ -90,6 +99,21 @@ export default function Login() {
     <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4">
       <div className="w-full space-y-6 text-gray-400 sm:max-w-md">
         <div className="text-center">
+          <div className="flex flex-col items-center">
+            <Image
+              src={IconImage}
+              alt="LetsCode Logo"
+              width={100}
+              height={100}
+              quality={95}
+              priority
+              style={{
+                width: 'auto',
+                height: 'auto',
+              }}
+            />
+            <h1 className="fonth1 ml-2">LetsCode</h1>
+          </div>
           <div className="mt-5 space-y-2">
             <h3 className="text-white text-2xl font-bold sm:text-3xl">Log in to your account</h3>
             <p className="">

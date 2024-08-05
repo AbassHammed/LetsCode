@@ -251,3 +251,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.fonth1 {
+  font-family: 'Irish Grover', cursive;
+}
