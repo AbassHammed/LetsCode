@@ -1,6 +1,7 @@
 /* eslint-disable quotes */
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { auth } from '@/firebase/firebase';
@@ -20,6 +21,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { confirmPasswordReset } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import IconImage from '../../../public/Icon.png';
 
 const passwordSchema = z
   .string()
@@ -81,8 +84,23 @@ const ResetPassword = () => {
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4">
-      <div className="w-full space-y-6 text-gray-400 sm:max-w-md">
-        <div className="bg-neutral-800 shadow p-4 py-6 sm:p-6 sm:rounded-lg">
+      <div className="w-full space-y-6 text-gray-400 sm:max-w-lg">
+        <div className="flex flex-col items-center">
+          <Image
+            src={IconImage}
+            alt="LetsCode Logo"
+            width={100}
+            height={100}
+            quality={95}
+            priority
+            style={{
+              width: 'auto',
+              height: 'auto',
+            }}
+          />
+          <h1 className="fonth1 ml-2">LetsCode</h1>
+        </div>
+        <div className="bg-neutral-800 shadow p-4 py-6 sm:p-6 mx-4 rounded-lg">
           <h3 className="text-white text-2xl font-semibold pb-3 sm:text-3xl">
             Reset your password
           </h3>
@@ -132,7 +150,7 @@ const ResetPassword = () => {
 
               <Button
                 type="submit"
-                className="text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600">
+                className="text-white font-medium bg-brand-purple hover:bg-brand-purple-s">
                 {/* {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} */}
                 Submit
               </Button>
