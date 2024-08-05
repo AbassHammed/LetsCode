@@ -112,7 +112,7 @@ const SignUpForm = () => {
               Have an account?{' '}
               <Link
                 href="/auth/login"
-                className="font-medium text-indigo-600 hover:text-indigo-500">
+                className="font-medium text-brand-purple-s hover:text-brand-purple">
                 Log in
               </Link>
             </p>
@@ -215,7 +215,7 @@ const SignUpForm = () => {
                 )}
               />
 
-              <Button className="w-full px-4 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+              <Button className="w-full px-4 text-white font-medium bg-brand-purple-s hover:bg-brand-purple rounded-lg duration-150">
                 {loading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
                 Create account
               </Button>
