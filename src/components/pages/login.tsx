@@ -120,7 +120,7 @@ export default function Login() {
               Don&apos;t have an account?{' '}
               <Link
                 href="/auth/signup/"
-                className="font-medium text-brand-purple-s hover:text-brand-purple">
+                className="font-medium text-brand-purple hover:text-brand-purple-s">
                 Sign up
               </Link>
             </p>
@@ -179,14 +179,14 @@ export default function Login() {
               <div className="flex items-center justify-end text-sm">
                 <Link
                   href="/auth/password/forgot-password"
-                  className="text-center text-brand-purple-s hover:text-brand-purple">
+                  className="text-center text-brand-purple hover:text-brand-purple-s">
                   Forgot password?
                 </Link>
               </div>
 
               <Button
                 type="submit"
-                className="w-full px-4 text-white font-medium bg-brand-purple-s hover:bg-brand-purple rounded-lg duration-150">
+                className="w-full px-4 text-white font-medium bg-brand-purple hover:bg-brand-purple-s rounded-lg duration-150">
                 {loading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
                 Log In
               </Button>

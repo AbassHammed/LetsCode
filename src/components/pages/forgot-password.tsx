@@ -113,7 +113,7 @@ const ForgotPassword = () => {
               />
               <Button
                 type="submit"
-                className="text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600">
+                className="text-white font-medium bg-brand-purple hover:bg-brand-purple-s">
                 {sending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
                 Submit
               </Button>

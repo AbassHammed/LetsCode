@@ -1,8 +1,10 @@
 /* eslint-disable quotes */
 'use client';
 
+import { useState } from 'react';
+
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { auth } from '@/firebase/firebase';
 import {
@@ -13,7 +15,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  // Icons,
+  Icons,
   Input,
   toast,
 } from '@components';
@@ -53,6 +55,8 @@ const FormSchema = z
 
 const ResetPassword = () => {
   const router = useRouter();
+  const oobCode = useSearchParams().get('oobCode')!;
+  const [isPasswordHidden, setPasswordHidden] = useState(true);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -70,7 +74,7 @@ const ResetPassword = () => {
 
   const handlePasswordReset = async (data: { password: string; passwordConfirmation: string }) => {
     try {
-      await confirmPasswordReset(auth, '', data.password);
+      await confirmPasswordReset(auth, oobCode, data.password);
       router.push('/auth/login');
       return;
     } catch (err: any) {
@@ -113,15 +117,23 @@ const ResetPassword = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-white">New password</FormLabel>
+                    <FormLabel className="text-white">Password</FormLabel>
                     <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="********"
-                        autoComplete="current-password"
-                        {...field}
-                        onKeyDown={handleKeyDown}
-                      />
+                      <div className="relative mt-2">
+                        <button
+                          type="button"
+                          className="text-gray-400 absolute right-3 inset-y-0 my-auto active:text-gray-600"
+                          onClick={() => setPasswordHidden(!isPasswordHidden)}>
+                          {isPasswordHidden ? <Icons.eye /> : <Icons.eyesplash />}
+                        </button>
+                        <Input
+                          placeholder="********"
+                          type={isPasswordHidden ? 'password' : 'text'}
+                          autoComplete="current-password"
+                          {...field}
+                          onKeyDown={handleKeyDown}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -133,15 +145,23 @@ const ResetPassword = () => {
                 name="passwordConfirmation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-white">Confirm new password</FormLabel>
+                    <FormLabel className="text-white">Confirm Password</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="********"
-                        type="password"
-                        autoComplete="current-password"
-                        {...field}
-                        onKeyDown={handleKeyDown}
-                      />
+                      <div className="relative mt-2">
+                        <button
+                          type="button"
+                          className="text-gray-400 absolute right-3 inset-y-0 my-auto active:text-gray-600"
+                          onClick={() => setPasswordHidden(!isPasswordHidden)}>
+                          {isPasswordHidden ? <Icons.eye /> : <Icons.eyesplash />}
+                        </button>
+                        <Input
+                          placeholder="********"
+                          type={isPasswordHidden ? 'password' : 'text'}
+                          autoComplete="current-password"
+                          {...field}
+                          onKeyDown={handleKeyDown}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
