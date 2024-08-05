@@ -128,7 +128,7 @@ export default function Login() {
         </div>
         <div className="bg-neutral-800 shadow p-4 py-6 sm:p-6 sm:rounded-lg">
           <Form {...form}>
-            <form className="space-y-8 text-[#f5f5f5]" onSubmit={form.handleSubmit(handleLogin)}>
+            <form className="space-y-4 text-[#f5f5f5]" onSubmit={form.handleSubmit(handleLogin)}>
               <FormField
                 control={form.control}
                 name="email"
