@@ -107,7 +107,7 @@ const SignUpForm = () => {
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4 relative">
-      <div className="w-full space-y-6 text-gray-400 sm:max-w-md">
+      <div className="w-full space-y-6 text-gray-400 sm:max-w-lg">
         <div className="text-center">
           <div className="flex flex-col items-center">
             <Image
@@ -136,7 +136,7 @@ const SignUpForm = () => {
             </p>
           </div>
         </div>
-        <div className="bg-neutral-800 shadow p-4 py-6 sm:p-6 sm:rounded-lg">
+        <div className="bg-neutral-800 shadow p-4 py-6 sm:p-6 mx-4 rounded-lg">
           <Form {...form}>
             <form className="space-y-4 text-[#f5f5f5]" onSubmit={form.handleSubmit(handleSignUp)}>
               <FormField

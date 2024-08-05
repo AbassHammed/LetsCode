@@ -3,7 +3,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { useResetPassword } from '@/hooks';
+import { auth } from '@/firebase/firebase';
 import {
   Button,
   Form,
@@ -12,11 +12,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Icons,
+  // Icons,
   Input,
   toast,
 } from '@components';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { confirmPasswordReset } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -48,7 +49,6 @@ const FormSchema = z
   });
 
 const ResetPassword = () => {
-  const { resetPassword, isLoading } = useResetPassword();
   const router = useRouter();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -67,14 +67,9 @@ const ResetPassword = () => {
 
   const handlePasswordReset = async (data: { password: string; passwordConfirmation: string }) => {
     try {
-      const id = sessionStorage.getItem('tid')!;
-      const inputs = { ...data, id };
-
-      const res = await resetPassword(inputs);
-      if (res) {
-        router.push('/auth/login');
-        return;
-      }
+      await confirmPasswordReset(auth, '', data.password);
+      router.push('/auth/login');
+      return;
     } catch (err: any) {
       toast({
         variant: 'destructive',
@@ -138,7 +133,7 @@ const ResetPassword = () => {
               <Button
                 type="submit"
                 className="text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600">
-                {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+                {/* {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} */}
                 Submit
               </Button>
             </form>
