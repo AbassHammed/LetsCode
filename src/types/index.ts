@@ -40,7 +40,6 @@ export type SiteConfig = {
 
 export type SignupInputs = {
   fullName: string;
-  username: string;
   email: string;
   password: string;
   confirmPassword: string;
