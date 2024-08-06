@@ -3,11 +3,27 @@
 
 import { useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { firestore, storage } from '@/firebase/firebase';
 import { useAuth } from '@/hooks';
-import { Dialog, DialogContent, DialogFooter, DialogTrigger, toast } from '@components';
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Input,
+  toast,
+} from '@components';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Icons from '@icons';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
@@ -28,7 +44,7 @@ type CreateSessionValues = z.infer<typeof createSessionSchema>;
 
 export default function CreateSession() {
   const [open, setOpen] = useState(false);
-  const [pdfFile, setPdfFile] = useState<File>();
+  const [pdfFile, setPdfFile] = useState<File | null>();
   const [progress, setProgress] = useState(0);
   const [sessionId, setSessionId] = useState('');
   const [loading, setLoading] = useState(false);
@@ -89,7 +105,7 @@ export default function CreateSession() {
     }
   };
 
-  const handleCreate = async (data: { sessioName: string; sessionId: string }) => {
+  const handleCreate = async (data: { sessionName: string; sessionId: string }) => {
     setLoading(true);
     if (!user) {
       toast({
@@ -104,7 +120,7 @@ export default function CreateSession() {
       const filePath = await handleUploadFile();
       await addDoc(collection(firestore, 'sessions'), {
         userId: user.uid,
-        sessionName: data.sessioName,
+        sessionName: data.sessionName,
         sessionId: data.sessionId,
         filePath,
         createdAt: serverTimestamp(),
@@ -137,6 +153,8 @@ export default function CreateSession() {
     defaultValues,
   });
 
+  const handleRemoveFile = () => setPdfFile(null);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -145,20 +163,69 @@ export default function CreateSession() {
           Create a session
         </button>
       </DialogTrigger>
-      <DialogContent
-        showCloseIcon={false}
-        className="sm:max-w-[425px] bg-neutral-800 ring-1 ring-gray-400 ring-opacity-50">
-        <div className="p-5">Are you sure you want to archive all your chats ? </div>
-        <DialogFooter className="flex items-center bg-neutral-900 rounded-b-lg p-5 font-light">
-          <button className="flex-1 bg-blue-800 mx-2 p-2 rounded-md" type="submit">
-            Yes
-          </button>
-          <button
-            className="flex-1 bg-neutral-700 mx-2 p-2 rounded-md"
-            onClick={() => setOpen(false)}>
-            No
-          </button>
-        </DialogFooter>
+      <DialogContent>
+        <div className="bg-white rounded-lg shadow relative w-full bg-gradient-to-b from-brand-purple to-slate-900 mx-6">
+          <Form {...form}>
+            <form
+              className="space-y-8 px-6 py-4 text-[#f5f5f5]"
+              onSubmit={form.handleSubmit(handleCreate)}>
+              <DialogTitle>Create session</DialogTitle>
+              <FormField
+                control={form.control}
+                name="sessionName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Give your session a name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="johndoe@john.doe"
+                        autoComplete="username"
+                        {...field}
+                        onKeyDown={handleKeyDown}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="sessionId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Session Id</FormLabel>
+                    <FormControl>
+                      <div className="relative mt-2">
+                        <button
+                          type="button"
+                          className="text-gray-400 absolute right-3 inset-y-0 my-auto active:text-gray-600"
+                          onClick={() => handleGenerateSessionId()}>
+                          <Icons.eyesplash />
+                        </button>
+                        <Input
+                          type="text"
+                          autoComplete="sessionId"
+                          {...field}
+                          value={sessionId}
+                          onKeyDown={handleKeyDown}
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                type="submit"
+                className="w-full px-4 text-white font-medium bg-brand-purple hover:bg-brand-purple-s rounded-lg duration-150">
+                {loading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+                Log In
+              </Button>
+            </form>
+          </Form>
+        </div>
       </DialogContent>
     </Dialog>
   );
