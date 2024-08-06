@@ -17,11 +17,13 @@ import {
   DialogTrigger,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
   Input,
+  Switch,
   toast,
 } from '@components';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,6 +40,7 @@ const FILE_TYPE = 'application/pdf';
 const createSessionSchema = z.object({
   sessionName: z.string().min(7).max(25),
   sessionId: z.string().min(16).max(16),
+  showPdf: z.boolean(),
 });
 
 type CreateSessionValues = z.infer<typeof createSessionSchema>;
@@ -48,6 +51,7 @@ export default function CreateSession() {
   const [progress, setProgress] = useState(0);
   const [sessionId, setSessionId] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showFile, setShowFile] = useState(false);
   const { user } = useAuth();
   const router = useRouter();
 
@@ -105,7 +109,11 @@ export default function CreateSession() {
     }
   };
 
-  const handleCreate = async (data: { sessionName: string; sessionId: string }) => {
+  const handleCreate = async (data: {
+    sessionName: string;
+    sessionId: string;
+    showPdf: boolean;
+  }) => {
     setLoading(true);
     if (!user) {
       toast({
@@ -123,6 +131,7 @@ export default function CreateSession() {
         sessionName: data.sessionName,
         sessionId: data.sessionId,
         filePath,
+        showPdfFile: data.showPdf,
         createdAt: serverTimestamp(),
       });
       router.push(`/d/${data.sessionId}`);
@@ -146,6 +155,7 @@ export default function CreateSession() {
   const defaultValues: Partial<CreateSessionValues> = {
     sessionName: '',
     sessionId: '',
+    showPdf: false,
   };
 
   const form = useForm<CreateSessionValues>({
@@ -163,11 +173,11 @@ export default function CreateSession() {
           Create a session
         </button>
       </DialogTrigger>
-      <DialogContent>
-        <div className="bg-white rounded-lg shadow relative w-full bg-gradient-to-b from-brand-purple to-slate-900 mx-6">
+      <DialogContent className="bg-white rounded-lg shadow w-full sm:max-w-[450px] bg-gradient-to-b from-brand-purple to-slate-900 mx-auto">
+        <div>
           <Form {...form}>
             <form
-              className="space-y-8 px-6 py-4 text-[#f5f5f5]"
+              className="space-y-4 px-6 py-4 text-[#f5f5f5]"
               onSubmit={form.handleSubmit(handleCreate)}>
               <DialogTitle>Create session</DialogTitle>
               <FormField
@@ -178,8 +188,10 @@ export default function CreateSession() {
                     <FormLabel className="text-white">Give your session a name</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="johndoe@john.doe"
-                        autoComplete="username"
+                        id="sessionName"
+                        type="text"
+                        placeholder="TP Algorithmique"
+                        autoComplete="sessionName"
                         {...field}
                         onKeyDown={handleKeyDown}
                       />
@@ -204,6 +216,7 @@ export default function CreateSession() {
                           <Icons.eyesplash />
                         </button>
                         <Input
+                          id="sessionId"
                           type="text"
                           autoComplete="sessionId"
                           {...field}
@@ -217,11 +230,37 @@ export default function CreateSession() {
                 )}
               />
 
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="showPdf"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border border-white border-opacity-50 p-3 shadow-sm">
+                      <div className="space-y-0.5">
+                        <FormLabel>Include PDF file</FormLabel>
+                        <FormDescription>
+                          Receive emails about new products, features, and more.
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={e => {
+                            field.onChange(e);
+                            setShowFile(e);
+                          }}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <Button
                 type="submit"
                 className="w-full px-4 text-white font-medium bg-brand-purple hover:bg-brand-purple-s rounded-lg duration-150">
                 {loading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
-                Log In
+                {loading ? 'Creating ...' : 'Create'}
               </Button>
             </form>
           </Form>
