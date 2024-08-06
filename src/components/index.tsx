@@ -61,3 +61,5 @@ export { default as Loading } from './shared/loading';
 export { default as Provider } from './provider';
 export { default as CreateSession } from './global/Modals/createSession';
 export { default as JoinSession } from './global/Modals/joinSession';
+export { default as Apparence } from './global/Topbar/apparence';
+export { default as InitialsContainer } from './global/Topbar/initalsContainer';

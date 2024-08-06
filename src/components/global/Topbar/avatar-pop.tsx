@@ -1,12 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { connected } from 'process';
 import { ReactNode, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { ToastAction, useToast } from '@components';
+import {
+  Apparence,
+  Icons,
+  InitialsContainer,
+  Loading,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  ToastAction,
+  useToast,
+} from '@components';
 import { auth, firestore, storage } from '@firebase/firebase';
 import { userInfoQuery } from '@firebase/query';
 import { useAuth, useSession } from '@hooks';
@@ -179,5 +187,40 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
 
     fetchData();
   }, [user]);
-  return <div></div>;
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  return (
+    <Popover>
+      <PopoverTrigger className="flex cursor-pointer group relative !h-6 justify-center items-center">
+        <InitialsContainer name={userData.fullName} />
+      </PopoverTrigger>
+      <PopoverContent
+        onOpenAutoFocus={e => e.preventDefault()}
+        className="relative w-[270px] flex top-3 flex-col right-3 p-2 text-[14px] dark:bg-[#303030] border-none">
+        <div className="flex shrink-0 items-center px-[1px]">
+          <InitialsContainer name={userData.fullName} className="h-14 w-14" />
+          <div className="pl-3">
+            <h4 className="flex items-center text-small font-semibold">{userData.fullName}</h4>
+            <h5 className="text-small tracking-tight">{userData.email}</h5>
+          </div>
+          <div className="flex flex-row"></div>
+        </div>
+        <div className="m-0  p-0 px-4 md:mt-4 md:border-none md:px-0 dark:text-[#ffffff99]">
+          <Apparence />
+          {compilerPage && (
+            <Module onClick={handleQuit} label="Quit Session" icon={<Icons.quit />} />
+          )}
+          {dashBoardPage && (
+            <Module onClick={handleClose} label="Close Session" icon={<Icons.quit />} />
+          )}
+          <Module onClick={handleSignOut} label="Sign Out" icon={<Icons.logout />} />
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
 };
+
+export default AvatarPop;
