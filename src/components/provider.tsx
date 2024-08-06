@@ -24,8 +24,7 @@ const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
     // Check if window is defined which indicates we're running in the browser
     if (typeof window !== 'undefined') {
       const encryptedData = sessionStorage.getItem('sid');
-      const decryptedData = encryptedData ? decryptData(encryptedData) : null;
-      return decryptedData ? JSON.parse(decryptedData) : null;
+      return encryptedData ? JSON.parse(decryptData(encryptedData)) : null;
     }
     return null;
   });
@@ -33,8 +32,7 @@ const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       if (sessionData) {
-        const encryptedData = encryptData(JSON.stringify(sessionData));
-        sessionStorage.setItem('sid', encryptedData);
+        sessionStorage.setItem('sid', encryptData(JSON.stringify(sessionData)));
       } else {
         sessionStorage.removeItem('sid');
       }

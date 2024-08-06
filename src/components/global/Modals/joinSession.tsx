@@ -56,7 +56,7 @@ export default function JoinSession() {
     try {
       setLoading(true);
       const sessionsQuery = query(
-        collection(firestore, 'session'),
+        collection(firestore, 'sessions'),
         where('sessionId', '==', data.sessionId),
       );
       const querySnapshot = await getDocs(sessionsQuery);
@@ -66,7 +66,7 @@ export default function JoinSession() {
           variant: 'destructive',
           title: 'Session not found',
           description:
-            'It seeems like the session you are trying to join does not exist or it has been delected',
+            'It seeems like the session you are trying to join does not exist or it has been deleted',
         });
         return;
       }
@@ -91,7 +91,6 @@ export default function JoinSession() {
           sessionName: sessionLoad.sessionName,
           sessionDocId: sessionDoc.id,
         });
-
         router.push(`/c/${data.sessionId}`);
       } else {
         const userDoc = userSnapshot.docs[0];
@@ -104,6 +103,7 @@ export default function JoinSession() {
           });
           return;
         }
+
         setSessionData({
           ...sessionData,
           filePath: sessionLoad.filePath,
