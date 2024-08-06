@@ -56,3 +56,9 @@ export type UseAuthReturnType = {
   user: ReturnType<typeof useAuthState>[0];
   loading: ReturnType<typeof useAuthState>[1];
 };
+
+export interface SessionData {
+  filePath?: string;
+  sessionName?: string;
+  sessionDocId?: string;
+}
