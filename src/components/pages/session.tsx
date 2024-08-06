@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { CreateSession, Loading } from '@components';
+import { CreateSession, JoinSession, Loading } from '@components';
 import { useAuth } from '@hooks';
 
 import IconImage from '../../../public/Icon.png';
@@ -37,6 +37,7 @@ export default function Session() {
       </div>
 
       <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+        <JoinSession />
         <CreateSession />
       </div>
     </div>
