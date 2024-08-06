@@ -39,6 +39,23 @@ export {
   DialogTitle,
   DialogDescription,
 } from './shared/dialog';
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuRadioGroup,
+} from './shared/dropdown-menu';
 export { Switch } from './shared/switch';
 export { default as Loading } from './shared/loading';
 export { default as Provider } from './provider';
