@@ -66,3 +66,11 @@ export { default as InitialsContainer } from './global/Topbar/initalsContainer';
 export { ToolTip } from './shared/tooltip';
 export { default as Topbar } from './global/Topbar';
 export { Badge, badgeVariants } from './shared/badge';
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from './shared/card';
