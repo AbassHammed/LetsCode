@@ -53,7 +53,10 @@ interface AvatarPopProps {
 
 const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPage = false }) => {
   const { user, loading } = useAuth();
-  const [userData, setUserData] = useState({ fullName: '', email: '' });
+  const [userData, setUserData] = useState<{
+    fullName: string;
+    email: string;
+  } | null>(null);
   const { toast } = useToast();
   const { sessionData } = useSession();
   const router = useRouter();
@@ -177,10 +180,10 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
 
   useEffect(() => {
     const fetchData = async () => {
-      if (user && user.email) {
+      if (user) {
         const data = await userInfoQuery(user.uid);
         if (data) {
-          setUserData({ fullName: data.fullName, email: user.email });
+          setUserData({ fullName: data.fullName, email: user.email! });
         }
       }
     };
@@ -188,38 +191,40 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
     fetchData();
   }, [user]);
 
-  if (loading) {
+  if (loading || !user) {
     return <Loading />;
   }
 
   return (
-    <Popover>
-      <PopoverTrigger className="flex cursor-pointer group relative !h-6 justify-center items-center">
-        <InitialsContainer name={userData.fullName} />
-      </PopoverTrigger>
-      <PopoverContent
-        onOpenAutoFocus={e => e.preventDefault()}
-        className="relative w-[270px] flex top-3 flex-col right-3 p-2 text-[14px] dark:bg-[#303030] border-none">
-        <div className="flex shrink-0 items-center px-[1px]">
-          <InitialsContainer name={userData.fullName} className="h-14 w-14" />
-          <div className="pl-3">
-            <h4 className="flex items-center text-small font-semibold">{userData.fullName}</h4>
-            <h5 className="text-small tracking-tight">{userData.email}</h5>
+    userData && (
+      <Popover>
+        <PopoverTrigger className="flex cursor-pointer group relative !h-6 justify-center items-center">
+          <InitialsContainer name={userData.fullName} />
+        </PopoverTrigger>
+        <PopoverContent
+          onOpenAutoFocus={e => e.preventDefault()}
+          className="relative w-[270px] flex top-3 flex-col right-3 p-2 text-[14px] dark:bg-[#303030] border-none">
+          <div className="flex shrink-0 items-center px-[1px]">
+            <InitialsContainer name={userData.fullName} className="h-14 w-14" />
+            <div className="pl-3">
+              <h4 className="flex items-center text-small font-semibold">{userData.fullName}</h4>
+              <h5 className="text-small tracking-tight">{userData.email}</h5>
+            </div>
+            <div className="flex flex-row"></div>
           </div>
-          <div className="flex flex-row"></div>
-        </div>
-        <div className="m-0  p-0 px-4 md:mt-4 md:border-none md:px-0 dark:text-[#ffffff99]">
-          <Apparence />
-          {compilerPage && (
-            <Module onClick={handleQuit} label="Quit Session" icon={<Icons.quit />} />
-          )}
-          {dashBoardPage && (
-            <Module onClick={handleClose} label="Close Session" icon={<Icons.quit />} />
-          )}
-          <Module onClick={handleSignOut} label="Sign Out" icon={<Icons.logout />} />
-        </div>
-      </PopoverContent>
-    </Popover>
+          <div className="m-0  p-0 px-4 md:mt-4 md:border-none md:px-0 dark:text-[#ffffff99]">
+            <Apparence />
+            {compilerPage && (
+              <Module onClick={handleQuit} label="Quit Session" icon={<Icons.quit />} />
+            )}
+            {dashBoardPage && (
+              <Module onClick={handleClose} label="Close Session" icon={<Icons.quit />} />
+            )}
+            <Module onClick={handleSignOut} label="Sign Out" icon={<Icons.logout />} />
+          </div>
+        </PopoverContent>
+      </Popover>
+    )
   );
 };
 

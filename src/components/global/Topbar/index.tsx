@@ -19,7 +19,7 @@ interface TopbarProps {
   dashboardPage?: boolean;
 }
 
-const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage }) => {
+const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage = false }) => {
   const { user, loading } = useAuth();
   const [sessionName, setSessionName] = useState<string | null>(null);
 
@@ -71,7 +71,7 @@ const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage }) => {
               <div className="flex items-center justify-center">
                 <div className="h-[16px] w-[1px] bg-gray-500" />
                 <span className="font-medium text-[14px] mx-5 dark:text-[#f5f5f5]">
-                  {sessionName}
+                  {dashboardPage ? `Dashboard - ${sessionName}` : `${sessionName}`}
                 </span>
               </div>
             </ul>
