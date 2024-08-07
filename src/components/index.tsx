@@ -63,3 +63,4 @@ export { default as CreateSession } from './global/Modals/createSession';
 export { default as JoinSession } from './global/Modals/joinSession';
 export { default as Apparence } from './global/Topbar/apparence';
 export { default as InitialsContainer } from './global/Topbar/initalsContainer';
+export { ToolTip } from './shared/tooltip';

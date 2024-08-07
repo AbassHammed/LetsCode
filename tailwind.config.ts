@@ -19,6 +19,14 @@ const config = {
     },
     extend: {
       colors: {
+        'dark-layer-1': 'rgb(40,40,40)',
+        'dark-label-2': 'rgba(239, 241, 246, 0.75)',
+        'dark-divider-border-2': 'rgb(61, 61, 61)',
+        'dark-fill-2': 'hsla(0,0%,100%,.14)',
+        'dark-fill-3': 'hsla(0,0%,100%,.1)',
+        'dark-gray-6': 'rgb(138, 138, 138)',
+        'dark-gray-7': 'rgb(179, 179, 179)',
+        'gray-8': 'rgb(38, 38, 38)',
         'brand-purple': 'rgb(97, 12, 159)',
         'brand-purple-s': 'rgb(77, 7, 125)',
         border: 'hsl(var(--border))',
