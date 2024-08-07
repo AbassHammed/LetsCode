@@ -83,7 +83,7 @@ const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage = false }) 
             </div>
           </div>
         </div>
-        <div className="relative flex items-center gap-2 justify-end">
+        <div className="relative flex items-center gap-3 justify-end">
           {user && compilerPage && (
             <>
               <Timer />

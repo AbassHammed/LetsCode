@@ -11,8 +11,8 @@ export default function Settings() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="inline-flex items-center justify-center p-2 font-medium group focus:outline-none hover:dark:bg-[#ffffff14] hover:bg-[#e7e7e7]">
-          <Icons.settings className="dark:text-[#fff9] text-[#585c65] group-hover:text-black dark:group-hover:text-white" />
+        <button className="inline-flex items-center justify-center p-2 font-medium group focus:outline-none rounded hover:dark:bg-[#ffffff14] hover:bg-[#e7e7e7]">
+          <Icons.settings className="h-[18px] w-[18px] dark:text-[#fff9] text-[#585c65] group-hover:text-black dark:group-hover:text-white" />
         </button>
       </DialogTrigger>
       <DialogContent className="flex h-[460px] w-[600px] bg-white dark:bg-[#373737] p-0 m-0 rounded-lg border-0 ring-1 ring-[#969696] ring-opacity-35">

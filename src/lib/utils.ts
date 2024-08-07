@@ -7,10 +7,14 @@ export function cn(...inputs: ClassValue[]) {
 
 export function generateRandomHexColor() {
   const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
+  let color;
+
+  do {
+    color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+  } while (color === '#FFFFFF' || color === '#000000');
 
   const PColor = localStorage.getItem('p-color');
   if (PColor) {
