@@ -31,12 +31,13 @@ interface TooltipProps {
   children: React.ReactNode;
   message: string;
   side?: 'top' | 'right' | 'bottom' | 'left';
+  aschild?: boolean;
 }
 
-export const ToolTip: React.FC<TooltipProps> = ({ children, message, side }) => (
+export const ToolTip: React.FC<TooltipProps> = ({ children, message, side, aschild }) => (
   <TooltipProvider>
     <Tooltip>
-      <TooltipTrigger>{children}</TooltipTrigger>
+      <TooltipTrigger asChild={aschild}>{children}</TooltipTrigger>
       <TooltipContent
         className="dark:bg-[#303030] text-[#a8a8a8] border-none ease-out text-sm font-normal"
         side={side}>
