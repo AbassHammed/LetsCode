@@ -74,3 +74,14 @@ export {
   CardDescription,
   CardContent,
 } from './shared/card';
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from './shared/table';
