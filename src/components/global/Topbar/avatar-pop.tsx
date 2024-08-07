@@ -199,20 +199,20 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
     userData && (
       <Popover>
         <PopoverTrigger className="flex cursor-pointer group relative !h-6 justify-center items-center">
-          <InitialsContainer name={userData.fullName} />
+          <InitialsContainer name={userData.fullName} className="outline-none" />
         </PopoverTrigger>
         <PopoverContent
           onOpenAutoFocus={e => e.preventDefault()}
-          className="relative w-[270px] flex top-3 flex-col right-3 p-2 text-[14px] dark:bg-[#303030] border-none">
+          className="relative w-[270px] flex top-3 flex-col right-3 p-2 text-[14px] dark:bg-[#303030] border-none ring-1 ring-gray-300 ring-opacity-50">
           <div className="flex shrink-0 items-center px-[1px]">
-            <InitialsContainer name={userData.fullName} className="h-14 w-14" />
+            <InitialsContainer name={userData.fullName} className="h-14 w-14 text-[18px]" />
             <div className="pl-3">
               <h4 className="flex items-center text-small font-semibold">{userData.fullName}</h4>
               <h5 className="text-small tracking-tight">{userData.email}</h5>
             </div>
             <div className="flex flex-row"></div>
           </div>
-          <div className="m-0  p-0 px-4 md:mt-4 md:border-none md:px-0 dark:text-[#ffffff99]">
+          <div className="p-0 mt-4 md:border-none focus:outline-none dark:text-[#ffffff99]">
             <Apparence />
             {compilerPage && (
               <Module onClick={handleQuit} label="Quit Session" icon={<Icons.quit />} />

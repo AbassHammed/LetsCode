@@ -60,24 +60,30 @@ const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage = false }) 
   }
 
   return (
-    <nav className="flex h-[48px] w-full shrink-0 items-center pr-2">
+    <nav className="flex h-[48px] w-full shrink-0 items-center px-3">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center justify-center">
-          <div className="flex items-center">
-            <ul className="relative flex h-10 items-center justify-center">
-              <Link href="/">
-                <Image src="/Icon.png" alt="Logo" height={30} width={40} />
-              </Link>
-              <div className="flex items-center justify-center">
-                <div className="h-[16px] w-[1px] bg-gray-500" />
-                <span className="font-medium text-[14px] mx-5 dark:text-[#f5f5f5]">
-                  {dashboardPage ? `Dashboard - ${sessionName}` : `${sessionName}`}
-                </span>
-              </div>
-            </ul>
+          <div className="flex items-center space-x-3">
+            <Link href="/">
+              <Image
+                src="/Icon.png"
+                alt="Logo"
+                height={30}
+                width={40}
+                style={{ height: 'auto', width: 'auto' }}
+                priority
+                quality={95}
+              />
+            </Link>
+            <div className="flex items-center justify-center">
+              <div className="h-[16px] w-[1px] bg-gray-500" />
+              <span className="font-medium text-[14px] mx-3 dark:text-[#f5f5f5]">
+                {dashboardPage ? `Dashboard - ${sessionName}` : `${sessionName}`}
+              </span>
+            </div>
           </div>
         </div>
-        <div className="relative ml-4 flex items-center gap-2 justify-end">
+        <div className="relative flex items-center gap-2 justify-end">
           {user && compilerPage && (
             <>
               <Timer />

@@ -9,7 +9,7 @@ interface SettingsNavProps {
 
 export default function SettingNav({ setVariant, variant }: SettingsNavProps) {
   return (
-    <div className="bg-[#0000000a] p-4 dark:bg-[#262626] rounded-l-lg">
+    <div className="bg-gray-100 p-4 dark:bg-[#262626] rounded-l-lg">
       <h2 className="mb-4 text-lg font-medium">Settings</h2>
       <div className="flex flex-col gap-2">
         {SettingsNavItems.map(item => (
@@ -17,7 +17,9 @@ export default function SettingNav({ setVariant, variant }: SettingsNavProps) {
             onClick={() => setVariant(item.type)}
             key={item.type}
             className={cn(
-              variant === item.type ? 'bg-neutral-800' : 'hover:bg-neutral-800',
+              variant === item.type
+                ? 'dark:bg-[#373737] bg-zinc-200'
+                : 'dark:hover:bg-[#373737] hover:bg-zinc-200',
               'relative inline-flex items-center text-sm font-normal h-9 rounded justify-start px-3 py-[10px]',
             )}>
             <item.icon className={cn('mr-2 h-4 w-4')} />

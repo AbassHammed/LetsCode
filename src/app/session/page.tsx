@@ -8,7 +8,7 @@ import { Session } from '@pages';
 export const metadata: Metadata = {
   title: {
     default: 'Session',
-    template: `%s | ${siteConfig.url}`,
+    template: `%s - ${siteConfig.url}`,
   },
 };
 

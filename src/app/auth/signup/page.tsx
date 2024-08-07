@@ -6,7 +6,7 @@ import { SignUpForm } from '@pages';
 export const metadata: Metadata = {
   title: {
     default: 'Sign up',
-    template: `%s | ${siteConfig.url}`,
+    template: `%s - ${siteConfig.url}`,
   },
 };
 

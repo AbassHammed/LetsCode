@@ -8,7 +8,7 @@ import { Dashboard } from '@pages';
 export const metadata: Metadata = {
   title: {
     default: 'Dashboard',
-    template: `%s | ${siteConfig.url}`,
+    template: `%s - ${siteConfig.url}`,
   },
 };
 

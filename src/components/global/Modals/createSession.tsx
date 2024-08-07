@@ -138,7 +138,7 @@ export default function CreateSession() {
         showPdfFile: data.showPdf,
         createdAt: serverTimestamp(),
       });
-      router.push(`/d/${data.sessionId}`);
+      router.push(`/dashboard`);
     } catch (error) {
       toast({
         variant: 'destructive',

@@ -6,7 +6,7 @@ import { ResetPassword } from '@pages';
 export const metadata: Metadata = {
   title: {
     default: 'Reset Password',
-    template: `%s | ${siteConfig.url}`,
+    template: `%s - ${siteConfig.url}`,
   },
 };
 

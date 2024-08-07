@@ -6,7 +6,7 @@ import { Login } from '@pages';
 export const metadata: Metadata = {
   title: {
     default: 'Login',
-    template: `%s | ${siteConfig.url}`,
+    template: `%s - ${siteConfig.url}`,
   },
 };
 

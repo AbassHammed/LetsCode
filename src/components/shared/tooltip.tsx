@@ -39,7 +39,7 @@ export const ToolTip: React.FC<TooltipProps> = ({ children, message, side, aschi
     <Tooltip>
       <TooltipTrigger asChild={aschild}>{children}</TooltipTrigger>
       <TooltipContent
-        className="dark:bg-[#303030] text-[#a8a8a8] border-none ease-out text-sm font-normal"
+        className="dark:bg-[#303030] bg-[#fafafa] text-black dark:text-white font-extralight border-none ease-out text-sm ring-1 ring-gray-300 ring-opacity-35"
         side={side}>
         <p>{message}</p>
       </TooltipContent>

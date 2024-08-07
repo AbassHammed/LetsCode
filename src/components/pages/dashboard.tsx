@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen">
-      <Topbar dashboardPage={true} compilerPage={false} />
+      <Topbar dashboardPage={false} compilerPage={true} />
     </div>
   );
 }

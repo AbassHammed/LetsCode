@@ -42,12 +42,12 @@ export default function Apparence() {
         </DropdownMenuTrigger>
         <DropdownMenuPortal>
           <DropdownMenuContent className="w-48 dark:bg-[#303030] border-none" side="left">
-            <div className="flex flex-col">
+            <div className="flex flex-col p-2">
               {Themes.map((theme, idx) => (
                 <div
                   onClick={() => handleThemeChange(theme.value as 'dark' | 'light' | 'system')}
                   key={idx}
-                  className="relative flex w-full p-1 m-1 rounded-[4px] dark:text-[#f5f5f5] dark:hover:bg-[#404040] hover:bg-[#f5f5f5] focus:outline-none cursor-pointer">
+                  className="relative flex w-full p-1 rounded-[4px] dark:text-[#f5f5f5] dark:hover:bg-[#404040] hover:bg-[#f5f5f5] focus:outline-none cursor-pointer">
                   <span
                     className={`flex items-center mr-2 ${
                       selectedKey === theme.value ? 'visible' : 'invisible'
