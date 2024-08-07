@@ -4,6 +4,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 export type TernaryDarkMode = 'system' | 'dark' | 'light';
 
+export type SettingsNav = 'editor' | 'shortcuts' | 'advanced';
+
 export type TernaryDarkModeOptions = {
   defaultValue?: TernaryDarkMode;
   localStorageKey?: string;
