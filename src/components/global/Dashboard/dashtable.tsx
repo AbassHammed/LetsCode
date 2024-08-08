@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 import {
   Badge,
   Button,
@@ -27,7 +25,7 @@ import {
 
 export default function DashTable() {
   return (
-    <Card x-chunk="dashboard-06-chunk-0">
+    <Card>
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>Manage your products and view their sales performance.</CardDescription>
@@ -36,9 +34,6 @@ export default function DashTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="hidden w-[100px] sm:table-cell">
-                <span className="sr-only">Image</span>
-              </TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Price</TableHead>
@@ -51,15 +46,6 @@ export default function DashTable() {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
               <TableCell className="font-medium">Laser Lemonade Machine</TableCell>
               <TableCell>
                 <Badge variant="outline">Draft</Badge>
@@ -84,15 +70,6 @@ export default function DashTable() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
               <TableCell className="font-medium">Hypernova Headphones</TableCell>
               <TableCell>
                 <Badge variant="outline">Active</Badge>
@@ -117,15 +94,6 @@ export default function DashTable() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
               <TableCell className="font-medium">AeroGlow Desk Lamp</TableCell>
               <TableCell>
                 <Badge variant="outline">Active</Badge>
@@ -150,15 +118,6 @@ export default function DashTable() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
               <TableCell className="font-medium">TechTonic Energy Drink</TableCell>
               <TableCell>
                 <Badge variant="secondary">Draft</Badge>
@@ -183,15 +142,6 @@ export default function DashTable() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
               <TableCell className="font-medium">Gamer Gear Pro Controller</TableCell>
               <TableCell>
                 <Badge variant="outline">Active</Badge>
@@ -216,15 +166,6 @@ export default function DashTable() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
               <TableCell className="font-medium">Luminous VR Headset</TableCell>
               <TableCell>
                 <Badge variant="outline">Active</Badge>

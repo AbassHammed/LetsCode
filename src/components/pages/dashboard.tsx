@@ -4,6 +4,8 @@
 import { Loading, Topbar } from '@components';
 import { useAuth } from '@hooks';
 
+import DashTable from '../global/Dashboard/dashtable';
+
 export default function Dashboard() {
   const { user, loading } = useAuth();
 
@@ -14,6 +16,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen">
       <Topbar dashboardPage={true} compilerPage={false} />
+      <DashTable />
     </div>
   );
 }
