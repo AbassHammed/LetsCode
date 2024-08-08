@@ -4,9 +4,9 @@ import path from 'path';
 import { faker } from '@faker-js/faker';
 
 import { statuses } from './data';
-import { UserSchemaType } from './schema';
+import { UserType } from './schema';
 
-const users: UserSchemaType[] = Array.from({ length: 100 }, () => ({
+const users: UserType[] = Array.from({ length: 100 }, () => ({
   id: faker.number.int({ min: 1, max: 1000 }).toString(),
   name: faker.person.fullName(),
   connected: faker.helpers.arrayElement(statuses).value,

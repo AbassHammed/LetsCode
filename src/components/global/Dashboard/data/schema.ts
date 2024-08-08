@@ -8,4 +8,4 @@ export const userSchema = z.object({
   quittedAt: z.string().nullable(),
 });
 
-export type UserSchemaType = z.infer<typeof userSchema>;
+export type UserType = z.infer<typeof userSchema>;

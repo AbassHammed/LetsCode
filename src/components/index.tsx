@@ -97,3 +97,4 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 } from './shared/select';
+export { Checkbox } from './shared/check-box';
