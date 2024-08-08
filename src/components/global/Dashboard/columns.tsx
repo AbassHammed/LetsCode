@@ -33,17 +33,17 @@ export const columns: ColumnDef<UserType>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'id',
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Task" />,
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
-    enableSorting: false,
+    accessorKey: 'name',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
+    cell: ({ row }) => <div className="w-[200px]">{row.getValue('name')}</div>,
+    enableSorting: true,
     enableHiding: false,
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'connected',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => {
-      const status = statuses.find(status => status.value === row.getValue('status'));
+      const status = statuses.find(status => status.value === row.getValue('connected'));
 
       if (!status) {
         return null;
@@ -57,6 +57,28 @@ export const columns: ColumnDef<UserType>[] = [
       );
     },
     filterFn: (row, id, value) => value.includes(row.getValue(id)),
+  },
+  {
+    accessorKey: 'joinedAt',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Joined" />,
+    cell: ({ row }) => {
+      const data = row.getValue('quittedAt') as string;
+      const date = new Date(data).toLocaleTimeString();
+      return <div className="w-[100px]">{date}</div>;
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'quittedAt',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Disconnected" />,
+    cell: ({ row }) => {
+      const data = row.getValue('quittedAt') as string;
+      const date = new Date(data).toLocaleTimeString();
+      return <div className="w-[100px]">{date}</div>;
+    },
+    enableSorting: false,
+    enableHiding: false,
   },
   {
     id: 'actions',
