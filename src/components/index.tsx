@@ -85,3 +85,15 @@ export {
   TableCell,
   TableCaption,
 } from './shared/table';
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from './shared/select';
