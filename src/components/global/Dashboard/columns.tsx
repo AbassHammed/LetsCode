@@ -1,10 +1,9 @@
 'use client';
 
-import { Checkbox } from '@components';
+import { Badge, Checkbox } from '@components';
 import { ColumnDef } from '@tanstack/react-table';
 
 import { DataTableColumnHeader } from './column-header';
-import { statuses } from './data/data';
 import { UserType } from './data/schema';
 import { DataTableRowActions } from './row-actions';
 
@@ -43,16 +42,12 @@ export const columns: ColumnDef<UserType>[] = [
     accessorKey: 'connected',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => {
-      const status = statuses.find(status => status.value === row.getValue('connected'));
-
-      if (!status) {
-        return null;
-      }
-
+      const status = row.getValue('connected') as string;
       return (
         <div className="flex w-[100px] items-center">
-          {status.icon && <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-          <span>{status.label}</span>
+          <Badge variant={status === 'disconnected' ? 'destructive' : 'good'}>
+            {row.getValue('connected')}
+          </Badge>
         </div>
       );
     },
@@ -62,7 +57,7 @@ export const columns: ColumnDef<UserType>[] = [
     accessorKey: 'joinedAt',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Joined" />,
     cell: ({ row }) => {
-      const data = row.getValue('quittedAt') as string;
+      const data = row.getValue('joinedAt') as string;
       const date = new Date(data).toLocaleTimeString();
       return <div className="w-[100px]">{date}</div>;
     },
