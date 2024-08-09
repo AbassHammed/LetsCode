@@ -7,7 +7,8 @@ import Link from 'next/link';
 
 import { Loading, toast } from '@components';
 import { firestore } from '@firebase/firebase';
-import { useAuth } from '@hooks';
+import { useAuth, useScroll } from '@hooks';
+import { cn } from '@lib/utils';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
 import Settings from '../settings';
@@ -22,6 +23,7 @@ interface TopbarProps {
 const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage = false }) => {
   const { user, loading } = useAuth();
   const [sessionName, setSessionName] = useState<string | null>(null);
+  const scrolled = useScroll(5);
 
   useEffect(() => {
     const handleSession = async () => {
@@ -60,7 +62,13 @@ const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage = false }) 
   }
 
   return (
-    <nav className="flex h-[48px] w-full shrink-0 bg-background items-center top-0 left-0 px-3 fixed">
+    <nav
+      className={cn(
+        `sticky flex h-[48px] w-full shrink-0 bg-background items-center top-0 left-0 px-3`,
+        {
+          'border-b backdrop-blur-lg': scrolled,
+        },
+      )}>
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center justify-center">
           <div className="flex items-center space-x-3">
