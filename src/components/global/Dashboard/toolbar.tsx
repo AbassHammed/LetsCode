@@ -3,6 +3,7 @@
 import { Input } from '@components';
 import { Table } from '@tanstack/react-table';
 
+import ExportToCsv from './export';
 import { DataTableViewOptions } from './view-options';
 
 interface DataTableToolbarProps<TData> {
@@ -20,7 +21,10 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
           className="h-8 w-[150px] lg:w-[250px]"
         />
       </div>
-      <DataTableViewOptions table={table} />
+      <div className="flex items-center justify-between flex-row space-x-2">
+        <ExportToCsv />
+        <DataTableViewOptions table={table} />
+      </div>
     </div>
   );
 }
