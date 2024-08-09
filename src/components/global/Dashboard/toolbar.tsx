@@ -8,9 +8,10 @@ import { DataTableViewOptions } from './view-options';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
+  data: TData[];
 }
 
-export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table, data }: DataTableToolbarProps<TData>) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
@@ -22,7 +23,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
         />
       </div>
       <div className="flex items-center justify-between flex-row space-x-2">
-        <ExportToCsv />
+        <ExportToCsv data={data} />
         <DataTableViewOptions table={table} />
       </div>
     </div>
