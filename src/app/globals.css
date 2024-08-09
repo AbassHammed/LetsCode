@@ -255,3 +255,52 @@
 .fonth1 {
   font-family: 'Irish Grover', cursive;
 }
+
+/* General Styling */
+::-webkit-scrollbar {
+  width: 6px; /* For vertical scrollbars */
+  height: 6px; /* For horizontal scrollbars */
+}
+
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Adjust color as needed */
+  border-radius: 4px;
+  border: none;
+}
+
+/* Firefox */
+*::-moz-scrollbar {
+  width: 6px; /* For vertical scrollbars */
+  height: 6px; /* For horizontal scrollbars */
+}
+
+*::-moz-scrollbar-track {
+  background: transparent;
+}
+
+*::-moz-scrollbar-thumb {
+  background: #888; /* Adjust color as needed */
+  border-radius: 4px;
+  border: none;
+}
+
+/* Internet Explorer 10+ */
+*::-ms-scrollbar {
+  width: 6px; /* For vertical scrollbars */
+  height: 6px; /* For horizontal scrollbars */
+}
+
+*::-ms-scrollbar-track {
+  background: transparent;
+}
+
+*::-ms-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+  border: none;
+}

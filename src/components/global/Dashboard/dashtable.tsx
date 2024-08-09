@@ -37,7 +37,9 @@ export default async function TaskPage() {
           <p className="text-muted-foreground">Here&apos;s a list of your tasks for this month!</p>
         </div>
       </div>
-      <DataTable data={tasks} columns={columns} />
+      <div className="overflow-auto">
+        <DataTable data={tasks} columns={columns} />
+      </div>
     </div>
   );
 }

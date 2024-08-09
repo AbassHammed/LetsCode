@@ -60,7 +60,7 @@ const Topbar: React.FC<TopbarProps> = ({ compilerPage, dashboardPage = false }) 
   }
 
   return (
-    <nav className="flex h-[48px] w-full shrink-0 items-center px-3">
+    <nav className="flex h-[48px] w-full shrink-0 bg-background items-center top-0 left-0 px-3 fixed">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center justify-center">
           <div className="flex items-center space-x-3">
