@@ -1,18 +1,11 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-import { Metadata } from 'next';
-
 import { z } from 'zod';
 
 import { columns } from './columns';
 import { userSchema } from './data/schema';
 import { DataTable } from './table';
-
-export const metadata: Metadata = {
-  title: 'Tasks',
-  description: 'A task and issue tracker build using Tanstack Table.',
-};
 
 // Simulate a database read for tasks.
 async function getTasks() {
