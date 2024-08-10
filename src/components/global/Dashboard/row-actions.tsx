@@ -7,9 +7,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  toast,
 } from '@components';
+import { firestore } from '@firebase/firebase';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
+import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 import { userSchema } from './data/schema';
 
@@ -20,6 +23,40 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
   const user = userSchema.parse(row.original);
 
+  const handleBlock = async () => {
+    try {
+      const userDocRef = doc(firestore, `sessions/${user.sessionDocId}/users`, user.id);
+      await updateDoc(userDocRef, {
+        connected: false,
+        quittedAt: serverTimestamp(),
+      });
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'unknown Error',
+        description:
+          'The user can not be blocked from the session at the moment, please try again later',
+      });
+    }
+  };
+
+  const handleAllow = async () => {
+    try {
+      const userDocRef = doc(firestore, `sessions/${user.sessionDocId}/users`, user.id);
+      await updateDoc(userDocRef, {
+        connected: true,
+        quittedAt: null,
+      });
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'unknown Error',
+        description:
+          'The user can not be allowed into the session at the moment, please try again later',
+      });
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,8 +66,8 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Block</DropdownMenuItem>
-        <DropdownMenuItem>Allow</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleAllow}>Allow</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleBlock}>Block</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

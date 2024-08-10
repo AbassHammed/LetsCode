@@ -9,7 +9,7 @@ const columns: CsvColumn[] = [
     title: 'Name',
   },
   {
-    key: 'connected',
+    key: 'status',
     title: 'Status',
   },
   {
