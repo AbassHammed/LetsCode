@@ -11,17 +11,14 @@ const columns: CsvColumn[] = [
   {
     key: 'connected',
     title: 'Status',
-    formatValue: (value: boolean) => (value ? 'Connected' : 'Disconnected'),
   },
   {
     key: 'joinedAt',
     title: 'Joined At',
-    formatValue: (value: string) => new Date(value).toLocaleTimeString(),
   },
   {
     key: 'quittedAt',
     title: 'Left At',
-    formatValue: (value: string) => new Date(value).toLocaleTimeString(),
   },
 ];
 

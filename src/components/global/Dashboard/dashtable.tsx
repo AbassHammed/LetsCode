@@ -1,7 +1,5 @@
 'use client';
 
-// import { promises as fs } from 'fs';
-// import path from 'path';
 import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
@@ -12,26 +10,11 @@ import { firestore } from '@firebase/firebase';
 import { useAuth } from '@hooks';
 import { collection, onSnapshot, query, Timestamp, where } from 'firebase/firestore';
 
-// import { z } from 'zod';
-
 import { columns } from './columns';
 import { UserType } from './data/schema';
 import { DataTable } from './table';
 
-// Simulate a database read for tasks.
-// async function getTasks() {
-//   const data = await fs.readFile(
-//     path.join(process.cwd(), 'src/components/global/Dashboard/data/users.json'),
-//     'utf8',
-//   );
-
-//   const tasks = JSON.parse(data.toString());
-
-//   return z.array(userSchema).parse(tasks);
-// }
-
 export default function TaskPage() {
-  // const tasks = await getTasks();
   const { user, loading } = useAuth();
   const [users, setUsers] = useState<UserType[]>([]);
   const router = useRouter();
@@ -71,8 +54,9 @@ export default function TaskPage() {
 
           return {
             id: doc.id,
+            sessionDocId: sessionDoc.id,
             name: basicUserData.name,
-            connected: basicUserData.connected ? 'connected' : 'disconnected',
+            status: basicUserData.connected ? 'connected' : 'disconnected',
             joinedAt: basicUserData.joinedAt.toDate().toLocaleTimeString() as string,
             quittedAt: basicUserData.quittedAt
               ? (basicUserData.quittedAt.toDate().toLocaleTimeString() as string)
