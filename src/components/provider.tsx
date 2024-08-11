@@ -3,10 +3,13 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import { Toaster } from '@components';
+import { useMediaQuery } from '@hooks';
 import { decryptData, encryptData } from '@lib/crypto';
 import { SessionData } from '@types';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { type ThemeProviderProps } from 'next-themes/dist/types';
+
+import MobileScreen from './mobile';
 
 interface SessionProviderProps {
   children: React.ReactNode;
@@ -54,11 +57,20 @@ interface ProviderProps {
   children: React.ReactNode;
 }
 
-const Provider: React.FC<ProviderProps> = ({ children }) => (
-  <ThemeProvider attribute="class" enableSystem defaultTheme="system" disableTransitionOnChange>
-    <SessionProvider>{children}</SessionProvider>
-    <Toaster />
-  </ThemeProvider>
-);
+const Provider: React.FC<ProviderProps> = ({ children }) => {
+  const matches = useMediaQuery('(min-width: 768px)');
+  const [isClient, setClient] = useState(false);
+
+  useEffect(() => {
+    setClient(true);
+  }, []);
+
+  return (
+    <ThemeProvider attribute="class" enableSystem defaultTheme="system" disableTransitionOnChange>
+      <SessionProvider>{isClient && matches ? children : <MobileScreen />}</SessionProvider>
+      <Toaster />
+    </ThemeProvider>
+  );
+};
 
 export default Provider;
