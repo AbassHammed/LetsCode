@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { Timestamp } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 export type TernaryDarkMode = 'system' | 'dark' | 'light';
@@ -64,3 +65,13 @@ export interface SessionData {
   sessionName?: string;
   sessionDocId?: string;
 }
+
+export type Session = {
+  filePath: string | null;
+  sessionId: string;
+  sessionName: string;
+  showPdfFile: boolean;
+  showWhenJoined: boolean;
+  createdAt: Timestamp;
+  userId: string;
+};

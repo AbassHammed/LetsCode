@@ -8,7 +8,8 @@ import { Button, Icons, Input, Label } from '@components';
 import Loading from '@components/shared/loading';
 import { toast } from '@components/shared/toast';
 import { firestore } from '@firebase/firebase';
-import { useAuth } from '@hooks';
+import { useAuth, useCopyToClipboard } from '@hooks';
+import { Session } from '@types';
 import { collection, onSnapshot, query, Timestamp, where } from 'firebase/firestore';
 import QRCode from 'react-qr-code';
 
@@ -19,7 +20,16 @@ import { DataTable } from './table';
 export default function TaskPage() {
   const { user, loading } = useAuth();
   const [users, setUsers] = useState<UserType[]>([]);
+  const [session, setSession] = useState<Session | null>(null);
+  const [copying, setCopy] = useState(false);
   const router = useRouter();
+  const [, copy] = useCopyToClipboard();
+
+  async function handleCopy(text: string) {
+    setCopy(true);
+    await copy(text);
+    setTimeout(() => setCopy(false), 5000);
+  }
 
   useEffect(() => {
     if (!user) {
@@ -39,6 +49,7 @@ export default function TaskPage() {
       }
 
       const sessionDoc = querySnapshot.docs[0];
+      setSession(sessionDoc.data() as Session);
       const usersRef = collection(firestore, 'sessions', sessionDoc.id, 'users');
       onSnapshot(usersRef, async snapshot => {
         const usersDataPromises = snapshot.docs.map(async doc => {
@@ -84,6 +95,8 @@ export default function TaskPage() {
     <Loading />;
   }
 
+  const sessionLink = `https://letscode.vercel.app/session?id=${session?.sessionId}#joinsession`;
+
   return (
     <div className="h-full flex-1 flex-col space-y-8 p-8 flex">
       <div className="flex items-center justify-between space-y-2">
@@ -100,11 +113,16 @@ export default function TaskPage() {
               <Label htmlFor="link" className="sr-only">
                 Link
               </Label>
-              <Input id="link" defaultValue="https://ui.shadcn.com/docs/installation" readOnly />
+              <Input id="link" defaultValue={sessionLink} readOnly />
             </div>
-            <Button type="submit" size="sm" className="px-3">
+            <Button
+              type="submit"
+              size="sm"
+              className="px-3"
+              disabled={copying}
+              onClick={() => handleCopy(sessionLink)}>
               <span className="sr-only">Copy</span>
-              <Icons.copy className="h-4 w-4" />
+              {copying ? <Icons.check className="h-4 w-4" /> : <Icons.copy className="h-4 w-4" />}
             </Button>
           </div>
         </div>
@@ -112,7 +130,7 @@ export default function TaskPage() {
           <QRCode
             size={256}
             style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
-            value={`${window.location.hostname}/session?id=123456789#joinsession`}
+            value={sessionLink}
             viewBox={`0 0 256 256`}
           />
         </div>
