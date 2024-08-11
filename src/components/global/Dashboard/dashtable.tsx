@@ -14,6 +14,7 @@ import { collection, onSnapshot, query, Timestamp, where } from 'firebase/firest
 import QRCode from 'react-qr-code';
 
 import { columns } from './columns';
+import ControlSessionVisibility from './control-visibility';
 import { UserType } from './data/schema';
 import { DataTable } from './table';
 
@@ -124,6 +125,9 @@ export default function TaskPage() {
               <span className="sr-only">Copy</span>
               {copying ? <Icons.check className="h-4 w-4" /> : <Icons.copy className="h-4 w-4" />}
             </Button>
+          </div>
+          <div className="grid  justify-start my-3">
+            <ControlSessionVisibility session={session} />
           </div>
         </div>
         <div className="flex items-center justify-center bg-white p-2 rounded">
