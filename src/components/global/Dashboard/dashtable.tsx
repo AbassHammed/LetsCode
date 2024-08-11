@@ -9,6 +9,7 @@ import { toast } from '@components/shared/toast';
 import { firestore } from '@firebase/firebase';
 import { useAuth } from '@hooks';
 import { collection, onSnapshot, query, Timestamp, where } from 'firebase/firestore';
+import QRCode from 'react-qr-code';
 
 import { columns } from './columns';
 import { UserType } from './data/schema';
@@ -88,6 +89,14 @@ export default function TaskPage() {
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
           <p className="text-muted-foreground">Here&apos;s a list of your tasks for this month!</p>
+        </div>
+        <div className="flex items-center justify-center bg-white p-2 rounded">
+          <QRCode
+            size={256}
+            style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+            value={`${window.location.hostname}/session?id=123456789#joinsession`}
+            viewBox={`0 0 256 256`}
+          />
         </div>
       </div>
       <div className="overflow-auto">

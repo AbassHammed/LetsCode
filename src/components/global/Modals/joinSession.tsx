@@ -3,7 +3,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { firestore } from '@/firebase/firebase';
 import { useAuth, useSession } from '@/hooks';
@@ -36,6 +36,8 @@ const joinSessionSchema = z.object({
 type JoinSessionValues = z.infer<typeof joinSessionSchema>;
 
 export default function JoinSession() {
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get('id');
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -129,24 +131,6 @@ export default function JoinSession() {
     await joinSession(data);
   };
 
-  useEffect(() => {
-    if (user) {
-      fetchUser();
-    }
-  }, [fetchUser, user]);
-
-  useEffect(() => {
-    if (window.location.hash === '#joinsession') {
-      setOpen(true);
-    }
-  }, []);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-    }
-  };
-
   const defaultValues: Partial<JoinSessionValues> = {
     sessionId: '',
   };
@@ -155,6 +139,25 @@ export default function JoinSession() {
     resolver: zodResolver(joinSessionSchema),
     defaultValues,
   });
+
+  useEffect(() => {
+    if (user) {
+      fetchUser();
+    }
+  }, [fetchUser, user]);
+
+  useEffect(() => {
+    if (window.location.hash === '#joinsession' && sessionId) {
+      form.setValue('sessionId', sessionId.toUpperCase());
+      setOpen(true);
+    }
+  }, [form, sessionId]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
