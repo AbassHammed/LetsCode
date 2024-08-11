@@ -106,7 +106,6 @@ export default function CreateSession() {
         title: 'File upload error',
         description: 'An error occurred while uploading the PDF file',
       });
-      throw error.message;
     }
   };
 

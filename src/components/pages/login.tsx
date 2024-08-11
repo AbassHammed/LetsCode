@@ -78,7 +78,13 @@ export default function Login() {
     try {
       const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password);
       if (newUser) {
-        router.push('/session');
+        const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
+        if (redirectUrl) {
+          sessionStorage.removeItem('redirectAfterLogin');
+          router.push(redirectUrl);
+        } else {
+          router.push('/session');
+        }
       } else if (error) {
         toast({
           variant: 'destructive',

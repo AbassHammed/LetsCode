@@ -12,6 +12,8 @@ export const useAuth = (): UseAuthReturnType => {
 
   useEffect(() => {
     if (!loading && !user) {
+      const currentUrl = window.location.href;
+      sessionStorage.setItem('redirectAfterLogin', currentUrl);
       router.push('/auth/login');
     }
   }, [user, loading, router]);

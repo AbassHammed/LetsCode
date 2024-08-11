@@ -135,6 +135,12 @@ export default function JoinSession() {
     }
   }, [fetchUser, user]);
 
+  useEffect(() => {
+    if (window.location.hash === '#joinsession') {
+      setOpen(true);
+    }
+  }, []);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
