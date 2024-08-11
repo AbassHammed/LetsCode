@@ -49,7 +49,8 @@ export const columns: ColumnDef<UserType>[] = [
         </div>
       );
     },
-    filterFn: (row, id, value) => value.includes(row.getValue(id)),
+    enableSorting: false,
+    enableHiding: false,
   },
   {
     accessorKey: 'joinedAt',

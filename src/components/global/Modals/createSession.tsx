@@ -39,6 +39,7 @@ const createSessionSchema = z.object({
   sessionName: z.string().min(7).max(25),
   sessionId: z.string().min(16).max(16),
   showPdf: z.boolean(),
+  showWhenJoined: z.boolean(),
 });
 
 type CreateSessionValues = z.infer<typeof createSessionSchema>;
@@ -113,6 +114,7 @@ export default function CreateSession() {
     sessionName: string;
     sessionId: string;
     showPdf: boolean;
+    showWhenJoined: boolean;
   }) => {
     setLoading(true);
     if (!user) {
@@ -136,6 +138,7 @@ export default function CreateSession() {
         sessionId: data.sessionId,
         filePath,
         showPdfFile: data.showPdf,
+        showWhenJoined: data.showWhenJoined,
         createdAt: serverTimestamp(),
       });
       router.push(`/dashboard`);
@@ -160,6 +163,7 @@ export default function CreateSession() {
     sessionName: '',
     sessionId: '',
     showPdf: true,
+    showWhenJoined: true,
   };
 
   const form = useForm<CreateSessionValues>({
@@ -243,9 +247,7 @@ export default function CreateSession() {
                     <FormItem className="flex flex-row items-center justify-between rounded-lg border border-gray-200 border-opacity-50 p-3 shadow-sm">
                       <div className="space-y-0.5">
                         <FormLabel>Include PDF file</FormLabel>
-                        <FormDescription>
-                          Receive emails about new products, features, and more.
-                        </FormDescription>
+                        <FormDescription>Choose to include pdf files</FormDescription>
                       </div>
                       <FormControl>
                         <Switch
@@ -255,6 +257,25 @@ export default function CreateSession() {
                             setShowFile(e);
                           }}
                         />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="showWhenJoined"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border border-gray-200 border-opacity-50 p-3 shadow-sm">
+                      <div className="space-y-0.5">
+                        <FormLabel>Show page content on join</FormLabel>
+                        <FormDescription>
+                          When on, users would be able to see the contents of the page immediately
+                          after joining
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch checked={field.value} onCheckedChange={e => field.onChange(e)} />
                       </FormControl>
                     </FormItem>
                   )}
