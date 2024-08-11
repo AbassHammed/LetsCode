@@ -223,7 +223,7 @@ export default function CreateSession() {
                           type="button"
                           className="text-gray-400 absolute right-3 inset-y-0 my-auto active:text-gray-600"
                           onClick={() => handleGenerateSessionId()}>
-                          <Icons.eyesplash />
+                          <Icons.dice />
                         </button>
                         <Input
                           id="sessionId"
