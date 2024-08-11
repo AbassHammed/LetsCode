@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import { Button, Icons, Input, Label } from '@components';
 import Loading from '@components/shared/loading';
 import { toast } from '@components/shared/toast';
 import { firestore } from '@firebase/firebase';
@@ -88,7 +89,24 @@ export default function TaskPage() {
       <div className="flex items-center justify-between space-y-2">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
-          <p className="text-muted-foreground">Here&apos;s a list of your tasks for this month!</p>
+          <div className="flex flex-col space-y-1.5 text-center sm:text-left my-3">
+            <h1 className="text-lg font-semibold leading-none tracking-tight">Share link</h1>
+            <p className="text-sm text-muted-foreground">
+              Anyone who has this link will be able to view this.
+            </p>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="grid flex-1 gap-2">
+              <Label htmlFor="link" className="sr-only">
+                Link
+              </Label>
+              <Input id="link" defaultValue="https://ui.shadcn.com/docs/installation" readOnly />
+            </div>
+            <Button type="submit" size="sm" className="px-3">
+              <span className="sr-only">Copy</span>
+              <Icons.copy className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
         <div className="flex items-center justify-center bg-white p-2 rounded">
           <QRCode

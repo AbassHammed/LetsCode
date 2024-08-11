@@ -5,3 +5,4 @@ export { useLocalStorage } from './useLocalStorage';
 export { useAuth } from './useAuth';
 export { useSession } from './useSession';
 export { default as useScroll } from './useScroll';
+export { useCopyToClipboard } from './usecopyToClipboard';
