@@ -105,7 +105,7 @@ export default function TaskPage() {
           <div className="flex flex-col space-y-1.5 text-center sm:text-left my-3">
             <h1 className="text-lg font-semibold leading-none tracking-tight">Share link</h1>
             <p className="text-sm text-muted-foreground">
-              Anyone who has this link will be able to view this.
+              Anyone who has this link can access the session page.
             </p>
           </div>
           <div className="flex items-center space-x-2">

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { Button } from '@components/shared/button';
@@ -47,7 +46,7 @@ export default function ResetSession() {
 
       toast({
         variant: 'default',
-        title: 'Session closed',
+        title: 'Session reset',
         description: 'Session has been successfully reset.',
       });
     } catch (error) {
@@ -63,7 +62,7 @@ export default function ResetSession() {
     toast({
       title: 'Close Session',
       description:
-        'Resetting this session will delete every user already in this session are the thier realted data permanently',
+        'Resetting this session will delete every user already in this session and any related data permanently',
       action: (
         <ToastAction altText="Close" onClick={handleResetSession}>
           Reset session
