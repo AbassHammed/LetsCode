@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { toast } from '@components/shared/toast';
+import { Button } from '@components/shared/button';
+import Icons from '@components/shared/icons';
+import { toast, ToastAction } from '@components/shared/toast';
 import { firestore } from '@firebase/firebase';
 import { useAuth } from '@hooks';
 import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
@@ -9,7 +11,7 @@ import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/fire
 export default function ResetSession() {
   const { user } = useAuth();
 
-  const handleCloseSession = async () => {
+  const handleResetSession = async () => {
     if (!user) {
       toast({
         variant: 'destructive',
@@ -56,4 +58,28 @@ export default function ResetSession() {
       });
     }
   };
+
+  const handleReset = async () => {
+    toast({
+      title: 'Close Session',
+      description:
+        'Resetting this session will delete every user already in this session are the thier realted data permanently',
+      action: (
+        <ToastAction altText="Close" onClick={handleResetSession}>
+          Reset session
+        </ToastAction>
+      ),
+    });
+  };
+
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      className="ml-auto hidden h-8 md:flex"
+      onClick={() => handleReset()}>
+      <Icons.sync className="mr-2 h-4 w-4" />
+      Reset
+    </Button>
+  );
 }

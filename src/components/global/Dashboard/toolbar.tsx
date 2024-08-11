@@ -4,7 +4,7 @@ import { Input } from '@components';
 import { Table } from '@tanstack/react-table';
 
 import ExportToCsv from './export';
-import { DataTableViewOptions } from './view-options';
+import ResetSession from './reset';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -24,7 +24,7 @@ export function DataTableToolbar<TData>({ table, data }: DataTableToolbarProps<T
       </div>
       <div className="flex items-center justify-between flex-row space-x-2">
         <ExportToCsv data={data} />
-        <DataTableViewOptions table={table} />
+        <ResetSession />
       </div>
     </div>
   );
