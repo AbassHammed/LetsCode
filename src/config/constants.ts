@@ -42,3 +42,8 @@ export const fonts = [
   { id: '10', name: '21px' },
   { id: '11', name: '22px' },
 ] as const;
+
+export const tabSizes = [
+  { key: 2, value: '2 spaces' },
+  { key: 4, value: '4 spaces' },
+];
