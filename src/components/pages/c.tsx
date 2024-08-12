@@ -61,7 +61,7 @@ const Compiler: React.FC = () => {
   }
 
   return (
-    <div className="!min-h-full">
+    <div className="!min-h-full w-full">
       <Head>
         <title>{sessionData.sessionName}</title>
       </Head>

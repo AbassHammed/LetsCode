@@ -4,7 +4,7 @@ import PDFViewer from './PDFViewer';
 import Playground from './Playground';
 
 const Workspace = () => (
-  <div className="flex h-[calc(100vh-50px)]">
+  <div className="flex w-full h-[calc(100vh-50px)]">
     <PDFViewer />
     <Playground />
   </div>

@@ -67,7 +67,11 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
 
   return (
     <ThemeProvider attribute="class" enableSystem defaultTheme="system" disableTransitionOnChange>
-      <SessionProvider>{isClient && matches ? children : <MobileScreen />}</SessionProvider>
+      <SessionProvider>
+        <div className="bg-[#f0f0f0] dark:bg-[#0f0f0f]">
+          {isClient && matches ? children : <MobileScreen />}
+        </div>
+      </SessionProvider>
       <Toaster />
     </ThemeProvider>
   );

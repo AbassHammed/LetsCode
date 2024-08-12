@@ -148,8 +148,10 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
       const usersDeletions = usersSnapshot.docs.map(userDoc => deleteDoc(userDoc.ref));
       await Promise.all(usersDeletions);
       await deleteDoc(sessionDocRef);
-      const fileRef = ref(storage, sessionDoc.data().filePath);
-      await deleteObject(fileRef);
+      if (sessionDoc.data().filePath) {
+        const fileRef = ref(storage, sessionDoc.data().filePath);
+        await deleteObject(fileRef);
+      }
 
       toast({
         variant: 'default',

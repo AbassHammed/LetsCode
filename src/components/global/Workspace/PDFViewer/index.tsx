@@ -10,10 +10,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 
 import Icons from '@components/shared/icons';
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface NavProps {
   pageNumber: number;
@@ -63,7 +60,7 @@ const PDFViewer = () => {
   return (
     <div
       tabIndex={-1}
-      className="dark:bg-[#282828] bg-white rounded-lg overflow-hidden ml-2 mb-2 flex-auto w-[40%] focus:ring-1 focus:ring-[#969696] focus:ring-opacity-50
+      className="dark:bg-[#282828] bg-white rounded-lg overflow-hidden ml-2 mb-2 flex-auto w-full md:w-1/2 lg:w-2/5 xl:w-1/3 max-w-[800px] focus:ring-1 focus:ring-[#969696] focus:ring-opacity-50
                        active:ring-1 active:ring-[#969696] active:ring-opacity-50">
       <Nav
         pageNumber={pageNumber}

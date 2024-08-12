@@ -44,7 +44,7 @@ const Playground = () => {
   };
 
   return (
-    <div className="flex flex-auto flex-col w-[55%]">
+    <div className="flex flex-auto flex-col w-full md:w-1/2 lg:w-3/5 xl:w-2/3">
       <div
         onClick={e => e.preventDefault()}
         tabIndex={-1}
