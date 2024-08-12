@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { languages } from '@config/lang';
 import { useReadLocalStorage, useTernaryDarkMode } from '@hooks';
 import { cn } from '@lib/utils';
-import CodeMirror from '@uiw/react-codemirror';
+import CodeMirror, { BasicSetupOptions } from '@uiw/react-codemirror';
 
 import EditorFooter from './footer';
 import PreferenceNav from './nav';
@@ -25,6 +25,7 @@ const Playground = ({ className, showPdfFile }: PlaygroundProps) => {
     sessionStorage.getItem('code') ||
       languages[selectedLanguage as keyof typeof languages].initialCode,
   );
+  const basicOptions = useReadLocalStorage<BasicSetupOptions>('editorOptions');
 
   useEffect(() => {
     sessionStorage.setItem('language', selectedLanguage);
@@ -62,6 +63,7 @@ const Playground = ({ className, showPdfFile }: PlaygroundProps) => {
         <PreferenceNav onLanguageSelect={handleLanguageSelect} />
         <div className="w-full overflow-auto dark:bg-[#262626] bg-white select-none h-[calc(100vh-140px)]">
           <CodeMirror
+            basicSetup={basicOptions ? basicOptions : true}
             value={currentCode}
             onChange={setCurrentCode}
             theme={isDarkMode ? 'dark' : 'light'}

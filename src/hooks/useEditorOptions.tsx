@@ -2,6 +2,7 @@
 /* eslint-disable indent */
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
+import { defaultOptions } from '@config/editor';
 import { BasicSetupOptions } from '@uiw/react-codemirror';
 
 const EditorOptionsContext = createContext<{
@@ -12,7 +13,7 @@ const EditorOptionsContext = createContext<{
 export const EditorOptionsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [options, setOptions] = useState<BasicSetupOptions>(() => {
     const storedOptions = localStorage.getItem('editorOptions');
-    return storedOptions ? JSON.parse(storedOptions) : {};
+    return storedOptions ? JSON.parse(storedOptions) : defaultOptions;
   });
 
   useEffect(() => {
