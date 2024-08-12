@@ -92,6 +92,7 @@ export default function JoinSession() {
           filePath: sessionLoad.filePath,
           sessionName: sessionLoad.sessionName,
           sessionDocId: sessionDoc.id,
+          showPdfFile: sessionLoad.showPdfFile,
         });
         router.push(`/c/${data.sessionId}`);
       } else {
@@ -111,6 +112,7 @@ export default function JoinSession() {
           filePath: sessionLoad.filePath,
           sessionName: sessionLoad.sessionName,
           sessionDocId: sessionDoc.id,
+          showPdfFile: sessionLoad.showPdfFile,
         });
 
         router.push(`/c/${data.sessionId}`);
@@ -162,7 +164,7 @@ export default function JoinSession() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="w-64 h-40 bg-[#610C9F] rounded-lg shadow-md flex flex-col items-center justify-center text-2xl font-bold cursor-pointer relative">
+        <button className="w-64 h-40 bg-[#610C9F] rounded-lg shadow-md flex flex-col items-center text-white justify-center text-2xl font-bold cursor-pointer relative">
           <Icons.join className="mb-2 h-10 w-10 text-3xl" />
           Join a session
         </button>

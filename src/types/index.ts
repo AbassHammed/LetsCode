@@ -64,6 +64,7 @@ export interface SessionData {
   filePath?: string;
   sessionName?: string;
   sessionDocId?: string;
+  showPdfFile?: boolean;
 }
 
 export type Session = {

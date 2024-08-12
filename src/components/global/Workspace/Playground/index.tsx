@@ -4,12 +4,18 @@ import React, { useEffect, useState } from 'react';
 
 import { languages } from '@config/lang';
 import { useReadLocalStorage, useTernaryDarkMode } from '@hooks';
+import { cn } from '@lib/utils';
 import CodeMirror from '@uiw/react-codemirror';
 
 import EditorFooter from './footer';
 import PreferenceNav from './nav';
 
-const Playground = () => {
+interface PlaygroundProps {
+  className?: string;
+  showPdfFile?: boolean;
+}
+
+const Playground = ({ className, showPdfFile }: PlaygroundProps) => {
   const { isDarkMode } = useTernaryDarkMode();
   const fontSize = useReadLocalStorage<string>('font-size');
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -48,8 +54,11 @@ const Playground = () => {
       <div
         onClick={e => e.preventDefault()}
         tabIndex={-1}
-        className="rounded-md overflow-hidden ml-1 mr-2 my-1 focus:ring-1 focus-within:ring-[#969696] focus:ring-opacity-50
-                       active:ring-1 active:ring-[#969696] active:ring-opacity-50">
+        className={cn(
+          `rounded-md overflow-hidden ml-1 mr-2 my-1 focus:ring-1 focus-within:ring-[#969696] focus:ring-opacity-50
+                       active:ring-1 active:ring-[#969696] active:ring-opacity-50`,
+          className,
+        )}>
         <PreferenceNav onLanguageSelect={handleLanguageSelect} />
         <div className="w-full overflow-auto dark:bg-[#262626] bg-white select-none h-[calc(100vh-140px)]">
           <CodeMirror
@@ -63,8 +72,8 @@ const Playground = () => {
       </div>
       <div
         tabIndex={-1}
-        className="focus:ring-1 focus:ring-[#969696] focus:ring-opacity-50
-                       active:ring-1 active:ring-[#969696] active:ring-opacity-50 rounded-lg ml-1 mr-2 mt-2 mb-1">
+        className={`focus:ring-1 focus:ring-[#969696] focus:ring-opacity-50
+                       active:ring-1 active:ring-[#969696] active:ring-opacity-50 rounded-lg ml-1 ${!showPdfFile ? 'mr-1' : 'mr-2'} mt-2 mb-1`}>
         <EditorFooter handleGenerate={handleGenerate} />
       </div>
     </div>

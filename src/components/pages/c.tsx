@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import Head from 'next/head';
-
 // import { firestore } from '@/firebase/firebase';
 import { useAuth } from '@/hooks/useAuth';
 import { useSession } from '@/hooks/useSession';
@@ -62,9 +60,6 @@ const Compiler: React.FC = () => {
 
   return (
     <div className="!min-h-full w-full">
-      <Head>
-        <title>{sessionData.sessionName}</title>
-      </Head>
       <Topbar compilerPage={true} dashboardPage={false} />
       <Workspace />
     </div>

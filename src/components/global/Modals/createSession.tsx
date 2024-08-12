@@ -177,8 +177,8 @@ export default function CreateSession() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="w-64 h-40 bg-[#03C988] rounded-lg shadow-md flex flex-col items-center justify-center text-2xl font-bold cursor-pointer relative">
-          <Icons.create className="mb-2 h-10 w-10 text-3xl" />
+        <button className="w-64 h-40 bg-[#03C988] rounded-lg shadow-md flex flex-col items-center justify-center text-2xl text-white font-bold cursor-pointer relative">
+          <Icons.create className="mb-2 h-10 w-10 text-3xl text-white" />
           Create a session
         </button>
       </DialogTrigger>
