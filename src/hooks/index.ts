@@ -7,3 +7,4 @@ export { useSession } from './useSession';
 export { default as useScroll } from './useScroll';
 export { useCopyToClipboard } from './useCopyToClipboard';
 export { useReadLocalStorage } from './useReadLocalStorage';
+export { useEditorOptions } from './useEditorOptions';

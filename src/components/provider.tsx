@@ -4,6 +4,7 @@ import React, { createContext, useEffect, useState } from 'react';
 
 import { Toaster } from '@components';
 import { useMediaQuery } from '@hooks';
+import { EditorOptionsProvider } from '@hooks/useEditorOptions';
 import { decryptData, encryptData } from '@lib/crypto';
 import { SessionData } from '@types';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
@@ -68,9 +69,11 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
   return (
     <ThemeProvider attribute="class" enableSystem defaultTheme="system" disableTransitionOnChange>
       <SessionProvider>
-        <div className="bg-[#f0f0f0] dark:bg-[#0f0f0f]">
-          {isClient && matches ? children : <MobileScreen />}
-        </div>
+        <EditorOptionsProvider>
+          <div className="bg-[#f0f0f0] dark:bg-[#0f0f0f]">
+            {isClient && matches ? children : <MobileScreen />}
+          </div>
+        </EditorOptionsProvider>
       </SessionProvider>
       <Toaster />
     </ThemeProvider>
