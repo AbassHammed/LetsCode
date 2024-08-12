@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Dialog, DialogContent, DialogTrigger, Icons } from '@components';
 import { SettingsNav } from '@types';
 
+import EditorSettings from './editor';
 import SettingNav from './settings-nav';
 
 export default function Settings() {
@@ -17,7 +18,9 @@ export default function Settings() {
       </DialogTrigger>
       <DialogContent className="flex h-[460px] w-[600px] bg-white dark:bg-[#373737] p-0 m-0 rounded-lg border-0 ring-1 ring-[#969696] ring-opacity-35">
         <SettingNav setVariant={setVariant} variant={variant} />
-        <div className="flex-1 lg:max-2xl overflow-auto"></div>
+        <div className="flex-1 lg:max-2xl overflow-auto">
+          <EditorSettings />
+        </div>
       </DialogContent>
     </Dialog>
   );

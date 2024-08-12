@@ -12,7 +12,7 @@ const FontDrop = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <div className="flex whitespace-nowrap !flex-row justify-center items-center m-1 rounded-md p-1 cursor-pointer hover:bg-gray-8  text-[#a8a8a8] text-sm font-normal">
+        <div className="flex whitespace-nowrap bg-gray-100 dark:bg-[#474747] !flex-row justify-center items-center m-1 rounded p-1 cursor-pointer text-sm font-extralight">
           {value}
           <Icons.chevronDown className="h-5 w-5" />
         </div>
@@ -25,7 +25,7 @@ const FontDrop = () => {
             <div
               onClick={() => setValue(font.name)}
               key={font.id}
-              className="relative flex w-24 p-1 m-1 rounded-[4px] text-[#f5f5f5] hover:bg-[#4d4d4d] focus:outline-none cursor-pointer">
+              className="relative flex w-24 p-1 m-1 rounded-[4px] dark:text-[#f5f5f5] dark:hover:bg-[#4d4d4d] hover:bg-[#f5f5f5] focus:outline-none cursor-pointer">
               <span
                 className={`flex items-center mr-2 ${
                   value === font.name ? 'visible' : 'invisible'

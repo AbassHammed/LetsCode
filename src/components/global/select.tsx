@@ -12,7 +12,7 @@ const KeyBind = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <div className="flex whitespace-nowrap !flex-row justify-center items-center m-1 rounded-md p-1 cursor-pointer hover:bg-gray-8  text-[#a8a8a8] text-sm font-normal">
+        <div className="flex whitespace-nowrap bg-gray-100 dark:bg-[#474747] !flex-row justify-center items-center m-1 rounded-md p-1 cursor-pointer text-sm font-extralight">
           {value}
           <Icons.chevronDown className="h-5 w-5" />
         </div>
@@ -23,7 +23,7 @@ const KeyBind = () => {
         <div className="flex flex-col">
           <div
             onClick={() => setValue('vscode')}
-            className="relative flex w-24 p-1 m-1 rounded-[4px] text-[#f5f5f5] hover:bg-[#4d4d4d] focus:outline-none cursor-pointer">
+            className="relative flex w-24 p-1 m-1 rounded-[4px] dark:text-[#f5f5f5] dark:hover:bg-[#4d4d4d] hover:bg-[#f5f5f5] focus:outline-none cursor-pointer">
             <span className={`flex items-center mr-2 `}>
               <Icons.check />
             </span>
@@ -41,8 +41,8 @@ const TabSize = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <div className="flex whitespace-nowrap !flex-row justify-center items-center m-1 rounded-md p-1 cursor-pointer hover:bg-gray-8  text-[#a8a8a8] text-sm font-normal">
-          {value}
+        <div className="flex whitespace-nowrap !flex-row justify-center bg-gray-100 dark:bg-[#474747] items-center m-1 rounded-md p-1 cursor-pointer text-sm font-extralight">
+          {`${value} spaces`}
           <Icons.chevronDown className="h-5 w-5" />
         </div>
       </PopoverTrigger>
@@ -54,14 +54,14 @@ const TabSize = () => {
             <div
               onClick={() => setValue(size.key)}
               key={`${size.key}`}
-              className="relative flex w-24 p-1 m-1 rounded-[4px] text-[#f5f5f5] hover:bg-[#4d4d4d] focus:outline-none cursor-pointer">
+              className="relative flex w-24 p-1 m-1 rounded-[4px] dark:text-[#f5f5f5] dark:hover:bg-[#4d4d4d] hover:bg-[#f5f5f5] focus:outline-none cursor-pointer">
               <span
                 className={`flex items-center mr-2 ${
                   value === size.key ? 'visible' : 'invisible'
                 }`}>
                 <Icons.check />
               </span>
-              <div className="text-left text-[14px]">{size.value}</div>
+              <div className="text-left text-[14px] text-nowrap">{size.value}</div>
             </div>
           ))}
         </div>
