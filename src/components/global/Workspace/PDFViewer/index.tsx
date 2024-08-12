@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react';
 
-import { useSession } from '@/hooks/useSession';
+import { useSession } from '@hooks';
 import { Document, Page, pdfjs } from 'react-pdf';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';

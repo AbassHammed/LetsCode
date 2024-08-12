@@ -3,14 +3,14 @@ import React from 'react';
 import { Metadata } from 'next';
 
 import { siteConfig } from '@config/site';
-import { Session } from '@pages';
+import { Compiler } from '@pages';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Session',
+    default: 'Compiler',
     template: `%s - ${siteConfig.url}`,
   },
 };
 
-const SessionPage = () => <Session />;
-export default SessionPage;
+const CompilerPage = () => <Compiler />;
+export default CompilerPage;
