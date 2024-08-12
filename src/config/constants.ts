@@ -29,14 +29,16 @@ export const SettingsNavItems: {
   },
 ];
 
-export const EDITOR_FONT_SIZES = [
-  '12px',
-  '13px',
-  '14px',
-  '15px',
-  '16px',
-  '17px',
-  '18px',
-  '19px',
-  '20px',
-];
+export const fonts = [
+  { id: '1', name: '12px' },
+  { id: '2', name: '13px' },
+  { id: '3', name: '14px' },
+  { id: '4', name: '15px' },
+  { id: '5', name: '16px' },
+  { id: '6', name: '17px' },
+  { id: '7', name: '18px' },
+  { id: '8', name: '19px' },
+  { id: '9', name: '20px' },
+  { id: '10', name: '21px' },
+  { id: '11', name: '22px' },
+] as const;

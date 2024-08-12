@@ -17,7 +17,7 @@ interface PlaygroundProps {
 
 const Playground = ({ className, showPdfFile }: PlaygroundProps) => {
   const { isDarkMode } = useTernaryDarkMode();
-  const fontSize = useReadLocalStorage<string>('font-size');
+  const fontSize = useReadLocalStorage<string>('fontSize');
   const [selectedLanguage, setSelectedLanguage] = useState(
     sessionStorage.getItem('language') || 'C++',
   );
