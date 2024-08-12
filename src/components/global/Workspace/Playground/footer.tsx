@@ -13,7 +13,7 @@ const EditorFooter: React.FC<EditorFooterProps> = ({ handleGenerate }) => (
         <button
           className="flex py-1 px-2 m-0 font-medium items-center bg-transparent text-sm dark:text-white rounded-[5px] box-border dark:hover:bg-[#404040] hover:bg-[#f0f0f0]"
           onClick={handleGenerate}>
-          <Icons.download className="mr-2 text-dark-green-s" />
+          <Icons.download className="mr-2 text-green-500" />
           Export file
         </button>
       </div>

@@ -44,11 +44,11 @@ const Playground = () => {
   };
 
   return (
-    <div className="flex flex-auto flex-col w-full md:w-1/2 lg:w-3/5 xl:w-2/3">
+    <div>
       <div
         onClick={e => e.preventDefault()}
         tabIndex={-1}
-        className="rounded-md overflow-hidden mx-2 focus:ring-1 focus-within:ring-[#969696] focus:ring-opacity-50
+        className="rounded-md overflow-hidden ml-1 mr-2 my-1 focus:ring-1 focus-within:ring-[#969696] focus:ring-opacity-50
                        active:ring-1 active:ring-[#969696] active:ring-opacity-50">
         <PreferenceNav onLanguageSelect={handleLanguageSelect} />
         <div className="w-full overflow-auto dark:bg-[#262626] bg-white select-none h-[calc(100vh-140px)]">
@@ -64,7 +64,7 @@ const Playground = () => {
       <div
         tabIndex={-1}
         className="focus:ring-1 focus:ring-[#969696] focus:ring-opacity-50
-                       active:ring-1 active:ring-[#969696] active:ring-opacity-50 rounded-lg mx-2 mt-2">
+                       active:ring-1 active:ring-[#969696] active:ring-opacity-50 rounded-lg ml-1 mr-2 mt-2 mb-1">
         <EditorFooter handleGenerate={handleGenerate} />
       </div>
     </div>

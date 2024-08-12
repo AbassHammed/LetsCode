@@ -60,7 +60,7 @@ const PDFViewer = () => {
   return (
     <div
       tabIndex={-1}
-      className="dark:bg-[#282828] bg-white rounded-lg overflow-hidden ml-2 mb-2 flex-auto w-full md:w-1/2 lg:w-2/5 xl:w-1/3 max-w-[800px] focus:ring-1 focus:ring-[#969696] focus:ring-opacity-50
+      className="dark:bg-[#282828] bg-white rounded-lg overflow-hidden ml-2 mr-1 my-1  focus:ring-1 focus:ring-[#969696] focus:ring-opacity-50
                        active:ring-1 active:ring-[#969696] active:ring-opacity-50">
       <Nav
         pageNumber={pageNumber}
@@ -68,8 +68,8 @@ const PDFViewer = () => {
         goToPrevPage={goToPrevPage}
         goToNextPage={goToNextPage}
       />
-      <div className="flex px-0 py-4 h-[calc(100vh-94px)] overflow-y-auto">
-        <div className="px-5">
+      <div className="flex px-0 py-2 h-[calc(100vh-94px)] overflow-y-auto">
+        <div className="px-2">
           <Document
             file={sessionData?.filePath}
             onLoadSuccess={onDocumentLoadSuccess}
