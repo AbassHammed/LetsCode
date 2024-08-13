@@ -5,20 +5,20 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { defaultOptions } from '@config/editor';
 import { BasicSetupOptions } from '@uiw/react-codemirror';
 
+import { useLocalStorage } from './useLocalStorage';
+
 const EditorOptionsContext = createContext<{
   options: BasicSetupOptions;
   updateOption: (key: keyof BasicSetupOptions, value: boolean) => void;
 } | null>(null);
 
 export const EditorOptionsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [options, setOptions] = useState<BasicSetupOptions>(() => {
-    const storedOptions = localStorage.getItem('editorOptions');
-    return storedOptions ? JSON.parse(storedOptions) : defaultOptions;
-  });
+  const [value, setValue] = useLocalStorage('editorOptions', defaultOptions);
+  const [options, setOptions] = useState<BasicSetupOptions>(value);
 
   useEffect(() => {
-    localStorage.setItem('editorOptions', JSON.stringify(options));
-  }, [options]);
+    setValue(options);
+  }, [options, setValue]);
 
   const updateOption = (key: keyof BasicSetupOptions, value: boolean) => {
     setOptions(prevOptions => ({ ...prevOptions, [key]: value }));

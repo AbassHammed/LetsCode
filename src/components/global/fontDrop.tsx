@@ -12,7 +12,7 @@ const FontDrop = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <div className="flex whitespace-nowrap bg-gray-100 dark:bg-[#474747] !flex-row justify-center items-center m-1 rounded p-1 cursor-pointer text-sm font-extralight">
+        <div className="flex whitespace-nowrap bg-gray-100 dark:bg-[#474747] h-6 !flex-row justify-center items-center m-1 rounded p-1 cursor-pointer text-sm font-extralight">
           {value}
           <Icons.chevronDown className="h-5 w-5" />
         </div>

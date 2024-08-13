@@ -9,7 +9,7 @@ import { KeyBind, TabSize } from '../select';
 export default function EditorSettings() {
   const { options, updateOption } = useEditorOptions();
   return (
-    <div className="gap-2 mt-14 font-medium text-sm p-2">
+    <div className="gap-4 space-y-4 mt-14 font-medium text-sm p-2">
       <div className="flex items-center justify-between">
         <span>Font Size</span>
         <FontDrop />
@@ -25,8 +25,17 @@ export default function EditorSettings() {
       <div className="flex items-center justify-between">
         <span>Show line numbers</span>
         <Switch
+          className="m-1"
           onCheckedChange={e => updateOption('lineNumbers', e)}
           checked={options.lineNumbers}
+        />
+      </div>
+      <div className="flex items-center justify-between">
+        <span>Show fold gutters</span>
+        <Switch
+          className="m-1"
+          onCheckedChange={e => updateOption('foldGutter', e)}
+          checked={options.foldGutter}
         />
       </div>
     </div>

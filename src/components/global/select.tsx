@@ -12,7 +12,7 @@ const KeyBind = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <div className="flex whitespace-nowrap bg-gray-100 dark:bg-[#474747] !flex-row justify-center items-center m-1 rounded-md p-1 cursor-pointer text-sm font-extralight">
+        <div className="flex whitespace-nowrap bg-gray-100 dark:bg-[#474747] h-6 !flex-row justify-center items-center m-1 rounded-md p-1 cursor-pointer text-sm font-extralight">
           {value}
           <Icons.chevronDown className="h-5 w-5" />
         </div>
@@ -41,7 +41,7 @@ const TabSize = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <div className="flex whitespace-nowrap !flex-row justify-center bg-gray-100 dark:bg-[#474747] items-center m-1 rounded-md p-1 cursor-pointer text-sm font-extralight">
+        <div className="flex whitespace-nowrap !flex-row h-6 justify-center bg-gray-100 dark:bg-[#474747] items-center m-1 rounded-md p-1 cursor-pointer text-sm font-extralight">
           {`${value} spaces`}
           <Icons.chevronDown className="h-5 w-5" />
         </div>
