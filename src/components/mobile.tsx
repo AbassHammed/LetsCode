@@ -4,7 +4,7 @@ import IconImage from '../../public/Icon.png';
 
 export default function MobileScreen() {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center text-center space-y-3">
+    <div className="flex h-screen w-screen flex-col items-center md:hidden justify-center text-center space-y-3">
       <div className="flex flex-col items-center">
         <Image
           src={IconImage}

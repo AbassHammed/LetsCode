@@ -25,4 +25,5 @@ export const defaultOptions: BasicSetupOptions = {
   foldKeymap: true,
   completionKeymap: true,
   lintKeymap: true,
+  tabSize: 2,
 };

@@ -9,7 +9,7 @@ import { useLocalStorage } from './useLocalStorage';
 
 const EditorOptionsContext = createContext<{
   options: BasicSetupOptions;
-  updateOption: (key: keyof BasicSetupOptions, value: boolean) => void;
+  updateOption: (key: keyof BasicSetupOptions, value: any) => void;
 } | null>(null);
 
 export const EditorOptionsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -20,7 +20,7 @@ export const EditorOptionsProvider: React.FC<{ children: React.ReactNode }> = ({
     setValue(options);
   }, [options, setValue]);
 
-  const updateOption = (key: keyof BasicSetupOptions, value: boolean) => {
+  const updateOption = (key: keyof BasicSetupOptions, value: any) => {
     setOptions(prevOptions => ({ ...prevOptions, [key]: value }));
   };
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { useLocalStorage } from '@/hooks';
+import { useEditorOptions, useLocalStorage } from '@/hooks';
 import { Icons, Popover, PopoverContent, PopoverTrigger } from '@components';
 import { tabSizes } from '@config/constants';
 
@@ -36,13 +36,12 @@ const KeyBind = () => {
 };
 
 const TabSize = () => {
-  const [value, setValue] = useLocalStorage('tabSize', 2);
-
+  const { options, updateOption } = useEditorOptions();
   return (
     <Popover>
       <PopoverTrigger>
         <div className="flex whitespace-nowrap !flex-row h-6 justify-center bg-gray-100 dark:bg-[#474747] items-center m-1 rounded-md p-1 cursor-pointer text-sm font-extralight">
-          {`${value} spaces`}
+          {`${options.tabSize} spaces`}
           <Icons.chevronDown className="h-5 w-5" />
         </div>
       </PopoverTrigger>
@@ -52,12 +51,12 @@ const TabSize = () => {
         <div className="flex flex-col">
           {tabSizes.map(size => (
             <div
-              onClick={() => setValue(size.key)}
+              onClick={() => updateOption('tabSize', size.key)}
               key={`${size.key}`}
               className="relative flex w-24 p-1 m-1 rounded-[4px] dark:text-[#f5f5f5] dark:hover:bg-[#4d4d4d] hover:bg-[#f5f5f5] focus:outline-none cursor-pointer">
               <span
                 className={`flex items-center mr-2 ${
-                  value === size.key ? 'visible' : 'invisible'
+                  options.tabSize === size.key ? 'visible' : 'invisible'
                 }`}>
                 <Icons.check />
               </span>
