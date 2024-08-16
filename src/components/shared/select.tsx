@@ -130,4 +130,4 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
-export { Select, SelectTrigger, SelectContent, SelectLabel, SelectItem, SelectValue };
+export { Select, SelectTrigger, SelectContent, SelectItem, SelectValue };

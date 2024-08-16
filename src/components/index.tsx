@@ -2,10 +2,9 @@ export { Button } from './shared/button';
 export { default as Icons } from './shared/icons';
 export { Input } from './shared/input';
 export { Label } from './shared/label';
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from './shared/popover';
+export { Popover, PopoverTrigger, PopoverContent } from './shared/popover';
 export { useToast, toast, Toaster } from './shared/toast';
 export {
-  useFormField,
   Form,
   FormItem,
   FormLabel,
@@ -14,18 +13,7 @@ export {
   FormMessage,
   FormField,
 } from './shared/form';
-export {
-  Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogTrigger,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-} from './shared/dialog';
+export { Dialog, DialogTrigger, DialogContent, DialogFooter, DialogTitle } from './shared/dialog';
 export {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -45,12 +33,5 @@ export { default as Topbar } from './global/Topbar';
 export { Badge } from './shared/badge';
 
 export { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from './shared/table';
-export {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectLabel,
-  SelectItem,
-  SelectValue,
-} from './shared/select';
+export { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from './shared/select';
 export { Checkbox } from './shared/check-box';
