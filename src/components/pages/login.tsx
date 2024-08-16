@@ -103,7 +103,7 @@ export default function Login() {
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4">
-      <div className="w-full space-y-6 text-gray-400 sm:max-w-lg">
+      <div className="w-full space-y-6 sm:max-w-lg">
         <div className="text-center">
           <div className="flex flex-col items-center">
             <Image
@@ -121,7 +121,7 @@ export default function Login() {
             <h1 className="fonth1 ml-2">LetsCode</h1>
           </div>
           <div className="mt-5 space-y-2">
-            <h3 className="text-white text-2xl font-bold sm:text-3xl">Log in to your account</h3>
+            <h3 className="text-2xl font-bold sm:text-3xl">Log in to your account</h3>
             <p className="">
               Don&apos;t have an account?{' '}
               <Link

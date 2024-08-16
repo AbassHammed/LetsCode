@@ -88,7 +88,7 @@ const ResetPassword = () => {
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4">
-      <div className="w-full space-y-6 text-gray-400 sm:max-w-lg">
+      <div className="w-full space-y-6 sm:max-w-lg">
         <div className="flex flex-col items-center">
           <Image
             src={IconImage}

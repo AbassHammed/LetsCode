@@ -31,6 +31,8 @@ import {
 import { deleteObject, ref } from 'firebase/storage';
 import { useSignOut } from 'react-firebase-hooks/auth';
 
+import TopBarDialog from './dialog';
+
 interface ModuleProps {
   onClick: () => void;
   label: string;
@@ -88,18 +90,6 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
         description: 'There was an error quitting the session',
       });
     }
-  };
-
-  const handleQuit = async () => {
-    toast({
-      title: 'Quit session',
-      description: 'Are you sure you want to quit this session',
-      action: (
-        <ToastAction altText="Quit" onClick={handleQuitSession}>
-          Quit
-        </ToastAction>
-      ),
-    });
   };
 
   const handleSignOut = async () => {
@@ -217,7 +207,13 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
           <div className="p-0 mt-4 md:border-none focus:outline-none dark:text-[#ffffff99]">
             <Apparence />
             {compilerPage && (
-              <Module onClick={handleQuit} label="Quit Session" icon={<Icons.quit />} />
+              <TopBarDialog
+                title="Quit session"
+                message="Are you sure you want to quit this session ?"
+                onClick={handleQuitSession}
+                label="Quit Session"
+                icon={<Icons.quit />}
+              />
             )}
             {dashBoardPage && (
               <Module onClick={handleClose} label="Close Session" icon={<Icons.quit />} />
