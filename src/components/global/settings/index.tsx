@@ -5,6 +5,7 @@ import { SettingsNav } from '@types';
 
 import EditorSettings from './editor';
 import SettingNav from './settings-nav';
+import ShortCut from './shortcut';
 
 export default function Settings() {
   const [variant, setVariant] = useState<SettingsNav>('editor');
@@ -16,10 +17,10 @@ export default function Settings() {
           <Icons.settings className="h-[18px] w-[18px] dark:text-[#fff9] text-[#585c65] group-hover:text-black dark:group-hover:text-white" />
         </button>
       </DialogTrigger>
-      <DialogContent className="flex h-[460px] w-[600px] bg-white dark:bg-[#373737] p-0 m-0 rounded-lg border-0 ring-1 ring-[#969696] ring-opacity-35">
+      <DialogContent className="flex h-[460px] w-[600px] bg-white gap-0 dark:bg-[#373737] p-0 m-0 rounded-lg border-0 ring-1 ring-[#969696] ring-opacity-35">
         <SettingNav setVariant={setVariant} variant={variant} />
         <div className="flex-1 lg:max-2xl overflow-auto">
-          {variant === 'editor' ? <EditorSettings /> : null}
+          {variant === 'editor' ? <EditorSettings /> : <ShortCut />}
         </div>
       </DialogContent>
     </Dialog>
