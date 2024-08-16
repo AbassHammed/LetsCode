@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
@@ -12,7 +12,6 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  ToastAction,
   useToast,
 } from '@components';
 import { auth, firestore, storage } from '@firebase/firebase';
@@ -32,21 +31,6 @@ import { deleteObject, ref } from 'firebase/storage';
 import { useSignOut } from 'react-firebase-hooks/auth';
 
 import TopBarDialog from './dialog';
-
-interface ModuleProps {
-  onClick: () => void;
-  label: string;
-  icon: ReactNode;
-}
-
-const Module: React.FC<ModuleProps> = ({ onClick, label, icon }) => (
-  <div
-    className="rounded cursor-pointer flex flex-row items-center py-3 space-x-6 px-2 md:space-x-3 md:py-[10px] dark:hover:bg-[#404040] hover:bg-[#f5f5f5] focus:outline-none"
-    onClick={onClick}>
-    <div className="leading-none">{icon}</div>
-    <div className="grow text-left">{label}</div>
-  </div>
-);
 
 interface AvatarPopProps {
   compilerPage?: boolean;
@@ -82,7 +66,7 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
         quittedAt: serverTimestamp(),
       });
 
-      router.push('/auth/login');
+      router.push('/session');
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -90,18 +74,6 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
         description: 'There was an error quitting the session',
       });
     }
-  };
-
-  const handleSignOut = async () => {
-    toast({
-      title: 'Sign Out',
-      description: 'You will be signed out, are you sure you want to sign out ? ',
-      action: (
-        <ToastAction altText="signOut" onClick={signOut}>
-          Sign Out
-        </ToastAction>
-      ),
-    });
   };
 
   const handleCloseSession = async () => {
@@ -128,6 +100,7 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
           description:
             'It seeems like the session you are trying to close does not exist, verify you are connected to internet and then reload your page please.',
         });
+        router.push('/session');
         return;
       }
 
@@ -148,6 +121,7 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
         title: 'Session closed',
         description: 'Session closed and file deleted successfully.',
       });
+      router.push('/session');
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -155,19 +129,6 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
         description: 'There was an error while closing the session, kindly try again.',
       });
     }
-  };
-
-  const handleClose = async () => {
-    toast({
-      title: 'Close Session',
-      description:
-        'Closing this session will delete every data related to this session permanently',
-      action: (
-        <ToastAction altText="Close" onClick={handleCloseSession}>
-          Close session
-        </ToastAction>
-      ),
-    });
   };
 
   useEffect(() => {
@@ -211,14 +172,23 @@ const AvatarPop: React.FC<AvatarPopProps> = ({ compilerPage = false, dashBoardPa
                 title="Quit session"
                 message="Are you sure you want to quit this session ?"
                 onClick={handleQuitSession}
-                label="Quit Session"
                 icon={<Icons.quit />}
               />
             )}
             {dashBoardPage && (
-              <Module onClick={handleClose} label="Close Session" icon={<Icons.quit />} />
+              <TopBarDialog
+                title="Close Session"
+                message="Closing this session will delete every data related to this session permanently"
+                onClick={handleCloseSession}
+                icon={<Icons.quit />}
+              />
             )}
-            <Module onClick={handleSignOut} label="Sign Out" icon={<Icons.logout />} />
+            <TopBarDialog
+              title="Sign out"
+              message="You will be signed out, are you sure you want to sign out ? "
+              onClick={signOut}
+              icon={<Icons.logout />}
+            />
           </div>
         </PopoverContent>
       </Popover>
