@@ -19,7 +19,7 @@ export default function Settings() {
       <DialogContent className="flex h-[460px] w-[600px] bg-white dark:bg-[#373737] p-0 m-0 rounded-lg border-0 ring-1 ring-[#969696] ring-opacity-35">
         <SettingNav setVariant={setVariant} variant={variant} />
         <div className="flex-1 lg:max-2xl overflow-auto">
-          <EditorSettings />
+          {variant === 'editor' ? <EditorSettings /> : null}
         </div>
       </DialogContent>
     </Dialog>

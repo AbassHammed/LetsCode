@@ -14,12 +14,13 @@ export default function SettingNav({ setVariant, variant }: SettingsNavProps) {
       <div className="flex flex-col gap-2">
         {SettingsNavItems.map(item => (
           <button
+            disabled={item.disable}
             onClick={() => setVariant(item.type)}
             key={item.type}
             className={cn(
-              variant === item.type
-                ? 'dark:bg-[#373737] bg-zinc-200'
-                : 'dark:hover:bg-[#373737] hover:bg-zinc-200',
+              variant === item.type && 'dark:bg-[#373737] bg-zinc-200',
+              !item.disable && 'dark:hover:bg-[#373737] hover:bg-zinc-200',
+              item.disable && 'cursor-not-allowed',
               'relative inline-flex items-center text-sm font-normal h-9 rounded justify-start px-3 py-[10px]',
             )}>
             <item.icon className={cn('mr-2 h-4 w-4')} />

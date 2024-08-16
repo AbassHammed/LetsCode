@@ -11,21 +11,25 @@ export const SettingsNavItems: {
   type: SettingsNav;
   label: string;
   icon: typeof Icons.alarm;
+  disable: boolean;
 }[] = [
   {
     type: 'editor',
     label: 'Code Editor',
     icon: Icons.editor,
+    disable: false,
   },
   {
     type: 'shortcuts',
     label: 'Shortcuts',
     icon: Icons.keyboard,
+    disable: false,
   },
   {
     type: 'advanced',
     label: 'Premium',
     icon: Icons.brush,
+    disable: true,
   },
 ];
 
