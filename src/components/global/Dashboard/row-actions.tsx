@@ -12,9 +12,8 @@ import {
 import { firestore } from '@firebase/firebase';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
+import { userSchema } from '@types';
 import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
-
-import { userSchema } from './data/schema';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

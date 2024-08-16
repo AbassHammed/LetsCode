@@ -2,9 +2,9 @@
 
 import { Badge, Checkbox } from '@components';
 import { ColumnDef } from '@tanstack/react-table';
+import { UserType } from '@types';
 
 import { DataTableColumnHeader } from './column-header';
-import { UserType } from './data/schema';
 import { DataTableRowActions } from './row-actions';
 
 export const columns: ColumnDef<UserType>[] = [

@@ -1,10 +1,10 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,19 +16,19 @@ const compat = new FlatCompat({
 
 const config = [
   ...compat.extends(
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
+    'next/core-web-vitals',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
   ),
   {
     plugins: {
-      "@typescript-eslint": typescriptEslint,
+      '@typescript-eslint': typescriptEslint,
     },
 
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2020,
-      sourceType: "module",
+      sourceType: 'module',
 
       parserOptions: {
         ecmaFeatures: {
@@ -38,36 +38,36 @@ const config = [
     },
 
     rules: {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/no-explicit-any": "off",
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
 
-      "no-console": [
-        "error",
+      'no-console': [
+        'error',
         {
-          allow: ["warn", "error"],
+          allow: ['warn', 'error'],
         },
       ],
 
-      curly: "warn",
-      eqeqeq: "error",
-      "no-eq-null": "error",
-      "no-use-before-define": ["error", "nofunc"],
+      curly: 'warn',
+      eqeqeq: 'error',
+      'no-eq-null': 'error',
+      'no-use-before-define': ['error', 'nofunc'],
 
-      "brace-style": [
-        "error",
-        "1tbs",
+      'brace-style': [
+        'error',
+        '1tbs',
         {
           allowSingleLine: true,
         },
       ],
 
-      "comma-dangle": ["error", "always-multiline"],
-      "comma-spacing": "error",
-      "comma-style": "error",
-      "func-call-spacing": "error",
+      'comma-dangle': ['error', 'always-multiline'],
+      'comma-spacing': 'error',
+      'comma-style': 'error',
+      'func-call-spacing': 'error',
 
       indent: [
-        "error",
+        'error',
         2,
         {
           SwitchCase: 1,
@@ -75,45 +75,45 @@ const config = [
         },
       ],
 
-      "key-spacing": [
-        "error",
+      'key-spacing': [
+        'error',
         {
-          mode: "minimum",
+          mode: 'minimum',
         },
       ],
 
-      "keyword-spacing": "error",
-      "object-curly-spacing": ["error", "always"],
-      "one-var": ["error", "never"],
+      'keyword-spacing': 'error',
+      'object-curly-spacing': ['error', 'always'],
+      'one-var': ['error', 'never'],
 
       quotes: [
-        "error",
-        "single",
+        'error',
+        'single',
         {
           allowTemplateLiterals: true,
         },
       ],
 
-      semi: ["error", "always"],
+      semi: ['error', 'always'],
 
-      "space-before-function-paren": [
-        "error",
+      'space-before-function-paren': [
+        'error',
         {
-          anonymous: "never",
-          named: "never",
-          asyncArrow: "always",
+          anonymous: 'never',
+          named: 'never',
+          asyncArrow: 'always',
         },
       ],
 
-      "space-infix-ops": "error",
-      "arrow-body-style": ["error", "as-needed"],
-      "arrow-parens": ["error", "as-needed"],
-      "arrow-spacing": "error",
-      "no-duplicate-imports": "error",
-      "no-useless-constructor": "error",
-      "no-var": "error",
-      "prefer-const": "error",
-      "prefer-template": "error",
+      'space-infix-ops': 'error',
+      'arrow-body-style': ['error', 'as-needed'],
+      'arrow-parens': ['error', 'as-needed'],
+      'arrow-spacing': 'error',
+      'no-duplicate-imports': 'error',
+      'no-useless-constructor': 'error',
+      'no-var': 'error',
+      'prefer-const': 'error',
+      'prefer-template': 'error',
     },
   },
 ];

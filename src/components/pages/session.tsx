@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { CreateSession, JoinSession, Loading } from '@components';
 import { useAuth } from '@hooks';
@@ -10,7 +10,6 @@ import IconImage from '../../../public/Icon.png';
 
 export default function Session() {
   const { user, loading } = useAuth();
-  const router = useRouter();
 
   if (loading || !user) {
     return <Loading />;
@@ -36,11 +35,11 @@ export default function Session() {
             <h1 className="fonth1 ml-2">LetsCode</h1>
           </div>
 
-          <button
-            className="absolute top-4 right-4 bg-[#610c9f] text-white py-2.5 px-5 border-none text-[1rem] rounded-md font-medium cursor-pointer hover:bg-[#4e077d]"
-            onClick={() => router.push('/dashboard')}>
+          <Link
+            href="/dashboard"
+            className="absolute top-4 right-4 bg-[#610c9f] text-white py-2.5 px-5 border-none text-[1rem] rounded-md font-medium cursor-pointer hover:bg-[#4e077d]">
             Go to dashboard
-          </button>
+          </Link>
         </div>
       </div>
 

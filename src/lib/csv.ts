@@ -1,4 +1,4 @@
-export type CsvFormatValueCallback = (value: any, dataItem?: Record<string, any>) => string;
+type CsvFormatValueCallback = (value: any, dataItem?: Record<string, any>) => string;
 
 export interface CsvColumn {
   key: string;

@@ -9,13 +9,12 @@ import Loading from '@components/shared/loading';
 import { toast } from '@components/shared/toast';
 import { firestore } from '@firebase/firebase';
 import { useAuth, useCopyToClipboard } from '@hooks';
-import { Session } from '@types';
+import { Session, UserType } from '@types';
 import { collection, onSnapshot, query, Timestamp, where } from 'firebase/firestore';
 import QRCode from 'react-qr-code';
 
 import { columns } from './columns';
 import ControlSessionVisibility from './control-visibility';
-import { UserType } from './data/schema';
 import { DataTable } from './table';
 
 export default function TaskPage() {
