@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -32,23 +33,16 @@ const Compiler: React.FC = () => {
       },
     );
 
-    document.addEventListener('mouseleave', () => {
-      setShowOverlay(true);
-    });
+    const handleMouseLeave = () => setShowOverlay(true);
+    const handleMouseEnter = () => setShowOverlay(false);
 
-    document.addEventListener('mouseenter', () => {
-      setShowOverlay(false);
-    });
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
       unsubscribe();
-      document.removeEventListener('mouseleave', () => {
-        setShowOverlay(true);
-      });
-
-      document.removeEventListener('mouseenter', () => {
-        setShowOverlay(false);
-      });
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, [user, sessionData]);
 
@@ -67,6 +61,13 @@ const Compiler: React.FC = () => {
       }
     };
 
+    // const handlePageShow = (event: PageTransitionEvent) => {
+    //   localStorage.setItem('lol', 'abasshammed');
+    //   if (event.persisted) {
+    //     handleDisconnect();
+    //   }
+    // };
+
     if (!sessionData || !user) {
       return;
     }
@@ -75,23 +76,35 @@ const Compiler: React.FC = () => {
       doc(firestore, `sessions/${sessionData.sessionDocId}/users`, user.uid),
       docSnapshot => {
         if (!docSnapshot.exists() || !docSnapshot.data()?.connected) {
+          // sessionStorage.removeItem('sid');
+          // sessionStorage.removeItem('code');
+          // sessionStorage.removeItem('language');
           router.push('/session');
         }
       },
     );
 
     document.addEventListener('visibilitychange', handleDisconnect);
+    window.addEventListener('pagehide', handleDisconnect);
 
     return () => {
       document.removeEventListener('visibilitychange', handleDisconnect);
-
+      window.removeEventListener('pagehide', handleDisconnect);
       unsubscribe();
     };
   }, [user, authLoading, sessionData, router]);
 
+  useEffect(() => {
+    history.pushState(null, '', location.href);
+  }, []);
+
   if (!user || authLoading || !sessionData) {
     return <Loading />;
   }
+
+  const entries = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+
+  console.log('reason', entries.type);
 
   return showScreen ? (
     <div className="!min-h-full w-full">
