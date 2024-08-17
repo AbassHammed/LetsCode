@@ -26,7 +26,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import Icons from '@icons';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, serverTimestamp, where } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useForm } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
@@ -126,6 +126,31 @@ export default function CreateSession() {
     }
 
     try {
+      // Count the overall number of sessions
+      const sessionCount = await getDocs(collection(firestore, 'sessions'));
+      if (sessionCount.size >= 20) {
+        toast({
+          variant: 'destructive',
+          title: 'Session creation Error',
+          description: 'The maximum number of allowed sessions has been reached.',
+        });
+        return;
+      }
+
+      // Check if the user already has an active session
+      const existingSession = await getDocs(
+        query(collection(firestore, 'sessions'), where('userId', '==', user.uid)),
+      );
+      if (!existingSession.empty) {
+        toast({
+          variant: 'destructive',
+          title: 'Session creation Error',
+          description:
+            'You already have an active session. You can only have one at a time due to limited ressources.',
+        });
+        return;
+      }
+
       let filePath = null;
 
       if (showFile) {

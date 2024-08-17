@@ -75,7 +75,20 @@ export default function JoinSession() {
 
       const sessionDoc = querySnapshot.docs[0];
       const sessionLoad = sessionDoc.data();
+
+      // Check the number of users in the session
       const usersRef = collection(firestore, `sessions/${sessionDoc.id}/users`);
+      const usersQuery = query(usersRef);
+      const usersSnapshot = await getDocs(usersQuery);
+      if (usersSnapshot.size >= 50) {
+        toast({
+          variant: 'destructive',
+          title: 'Session full',
+          description: 'The session has reached the maximum number of participants (50).',
+        });
+        return;
+      }
+
       const userDocRef = doc(firestore, `sessions/${sessionDoc.id}/users/${userData.uid}`);
       const userInfoQuery = query(usersRef, where('name', '==', userData.fullName));
       const userSnapshot = await getDocs(userInfoQuery);
