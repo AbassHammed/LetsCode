@@ -62,7 +62,7 @@ const Compiler: React.FC = () => {
         const userRef = doc(firestore, `sessions/${sessionData.sessionDocId}/users`, user.uid);
         await updateDoc(userRef, {
           connected: false,
-          quitedAt: serverTimestamp(),
+          quittedAt: serverTimestamp(),
         });
       }
     };
