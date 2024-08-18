@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { toast } from '@components';
+import { Loading, toast } from '@components';
 
 export default function NotFound() {
   const { push } = useRouter();
@@ -17,4 +17,6 @@ export default function NotFound() {
     });
     push('/session');
   }, []);
+
+  return <Loading />;
 }
