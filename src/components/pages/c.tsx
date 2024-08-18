@@ -20,6 +20,59 @@ const Compiler: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
+    const handleDisconnect = async () => {
+      if (user && typeof sessionData?.sessionDocId === 'string') {
+        const userRef = doc(firestore, `sessions/${sessionData.sessionDocId}/users`, user.uid);
+        await updateDoc(userRef, {
+          connected: false,
+          quittedAt: serverTimestamp(),
+        });
+        window.location.reload();
+      }
+    };
+
+    const navigationEntries = performance.getEntriesByType('navigation');
+    if (navigationEntries.length > 0) {
+      const navigationType = (navigationEntries[0] as PerformanceNavigationTiming).type;
+      if (navigationType === 'back_forward') {
+        handleDisconnect();
+      }
+    }
+
+    if (!sessionData || !user) {
+      return;
+    }
+
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'hidden') {
+        await handleDisconnect();
+      }
+    };
+
+    const unsubscribe = onSnapshot(
+      doc(firestore, `sessions/${sessionData.sessionDocId}/users`, user.uid),
+      docSnapshot => {
+        if (!docSnapshot.exists() || !docSnapshot.data()?.connected) {
+          router.push('/session');
+        }
+      },
+    );
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pagehide', handleDisconnect);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleDisconnect);
+      window.removeEventListener('pagehide', handleDisconnect);
+      unsubscribe();
+    };
+  }, [user, authLoading, sessionData, router]);
+
+  useEffect(() => {
+    history.pushState(null, '', location.href);
+  }, []);
+
+  useEffect(() => {
     if (!user || !sessionData) {
       return;
     }
@@ -45,58 +98,6 @@ const Compiler: React.FC = () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, [user, sessionData]);
-
-  useEffect(() => {
-    const handleDisconnect = async () => {
-      if (
-        user &&
-        typeof sessionData?.sessionDocId === 'string' &&
-        document.visibilityState === 'hidden'
-      ) {
-        const userRef = doc(firestore, `sessions/${sessionData.sessionDocId}/users`, user.uid);
-        await updateDoc(userRef, {
-          connected: false,
-          quittedAt: serverTimestamp(),
-        });
-      }
-    };
-
-    // const handlePageShow = (event: PageTransitionEvent) => {
-    //   localStorage.setItem('lol', 'abasshammed');
-    //   if (event.persisted) {
-    //     handleDisconnect();
-    //   }
-    // };
-
-    if (!sessionData || !user) {
-      return;
-    }
-
-    const unsubscribe = onSnapshot(
-      doc(firestore, `sessions/${sessionData.sessionDocId}/users`, user.uid),
-      docSnapshot => {
-        if (!docSnapshot.exists() || !docSnapshot.data()?.connected) {
-          // sessionStorage.removeItem('sid');
-          // sessionStorage.removeItem('code');
-          // sessionStorage.removeItem('language');
-          router.push('/session');
-        }
-      },
-    );
-
-    document.addEventListener('visibilitychange', handleDisconnect);
-    window.addEventListener('pagehide', handleDisconnect);
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleDisconnect);
-      window.removeEventListener('pagehide', handleDisconnect);
-      unsubscribe();
-    };
-  }, [user, authLoading, sessionData, router]);
-
-  useEffect(() => {
-    history.pushState(null, '', location.href);
-  }, []);
 
   if (!user || authLoading || !sessionData) {
     return <Loading />;

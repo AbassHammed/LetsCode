@@ -115,7 +115,7 @@ export default function JoinSession() {
             variant: 'destructive',
             title: 'Connection error',
             description:
-              'You have been disconnected from this session by the admin, kindly demand acces from the admin',
+              'You have been disconnected from this session, kindly demand acces from the admin',
           });
           return;
         }
